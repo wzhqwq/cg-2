@@ -8,6 +8,20 @@
 
 /* Begin PBXBuildFile section */
 		607F518C29ED60D700456824 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 607F518B29ED60D700456824 /* main.cpp */; };
+		607F51B129ED622C00456824 /* scene.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 607F519729ED622B00456824 /* scene.cpp */; };
+		607F51B529ED622C00456824 /* stb_image.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 607F51A129ED622B00456824 /* stb_image.cpp */; };
+		607F51B729ED622C00456824 /* texture.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 607F51A729ED622B00456824 /* texture.cpp */; };
+		607F51B829ED622C00456824 /* shader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 607F51A829ED622B00456824 /* shader.cpp */; };
+		607F51B929ED622C00456824 /* shaderReader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 607F51A929ED622B00456824 /* shaderReader.cpp */; };
+		607F51BA29ED622C00456824 /* geometry.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 607F51AB29ED622B00456824 /* geometry.cpp */; };
+		607F51BC29ED622C00456824 /* selection.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 607F51AF29ED622B00456824 /* selection.cpp */; };
+		607F51BF29ED630600456824 /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 607F51BE29ED630600456824 /* OpenGL.framework */; };
+		607F51D129F1538800456824 /* geoControl.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 607F51CF29F1538800456824 /* geoControl.cpp */; };
+		607F51D429F4369500456824 /* basic.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 607F51D229F4369500456824 /* basic.cpp */; };
+		607F51D729F43A7F00456824 /* assembled.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 607F51D529F43A7F00456824 /* assembled.cpp */; };
+		607F51DA29F43FD400456824 /* room.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 607F51D829F43FD400456824 /* room.cpp */; };
+		607F51DC29F4421300456824 /* libglfw.3.3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 607F51DB29F4421300456824 /* libglfw.3.3.dylib */; };
+		607F51E029F4422D00456824 /* libGLEW.2.2.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 607F51DF29F4422D00456824 /* libGLEW.2.2.0.dylib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -25,6 +39,40 @@
 /* Begin PBXFileReference section */
 		607F518829ED60D700456824 /* cg-2 */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = "cg-2"; sourceTree = BUILT_PRODUCTS_DIR; };
 		607F518B29ED60D700456824 /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
+		607F519329ED617E00456824 /* shape.frag */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = shape.frag; sourceTree = "<group>"; };
+		607F519529ED617E00456824 /* shape.vert */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = shape.vert; sourceTree = "<group>"; };
+		607F519729ED622B00456824 /* scene.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = scene.cpp; sourceTree = "<group>"; };
+		607F519829ED622B00456824 /* scene.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = scene.hpp; sourceTree = "<group>"; };
+		607F519929ED622B00456824 /* texture.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = texture.hpp; sourceTree = "<group>"; };
+		607F519F29ED622B00456824 /* stb_image.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = stb_image.h; sourceTree = "<group>"; };
+		607F51A129ED622B00456824 /* stb_image.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = stb_image.cpp; sourceTree = "<group>"; };
+		607F51A529ED622B00456824 /* shader.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = shader.hpp; sourceTree = "<group>"; };
+		607F51A629ED622B00456824 /* common.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = common.h; sourceTree = "<group>"; };
+		607F51A729ED622B00456824 /* texture.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = texture.cpp; sourceTree = "<group>"; };
+		607F51A829ED622B00456824 /* shader.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = shader.cpp; sourceTree = "<group>"; };
+		607F51A929ED622B00456824 /* shaderReader.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = shaderReader.cpp; sourceTree = "<group>"; };
+		607F51AB29ED622B00456824 /* geometry.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = geometry.cpp; sourceTree = "<group>"; };
+		607F51AC29ED622B00456824 /* selection.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = selection.hpp; sourceTree = "<group>"; };
+		607F51AE29ED622B00456824 /* geometry.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = geometry.hpp; sourceTree = "<group>"; };
+		607F51AF29ED622B00456824 /* selection.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = selection.cpp; sourceTree = "<group>"; };
+		607F51B029ED622B00456824 /* shaderReader.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = shaderReader.hpp; sourceTree = "<group>"; };
+		607F51BE29ED630600456824 /* OpenGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGL.framework; path = System/Library/Frameworks/OpenGL.framework; sourceTree = SDKROOT; };
+		607F51CB29ED682D00456824 /* camera_rotate.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = camera_rotate.png; sourceTree = "<group>"; };
+		607F51CC29ED682D00456824 /* selection.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = selection.png; sourceTree = "<group>"; };
+		607F51CD29ED682D00456824 /* move.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = move.png; sourceTree = "<group>"; };
+		607F51CE29ED682D00456824 /* magnify.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = magnify.png; sourceTree = "<group>"; };
+		607F51CF29F1538800456824 /* geoControl.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = geoControl.cpp; sourceTree = "<group>"; };
+		607F51D029F1538800456824 /* geoControl.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = geoControl.hpp; sourceTree = "<group>"; };
+		607F51D229F4369500456824 /* basic.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = basic.cpp; sourceTree = "<group>"; };
+		607F51D329F4369500456824 /* basic.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = basic.hpp; sourceTree = "<group>"; };
+		607F51D529F43A7F00456824 /* assembled.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = assembled.cpp; sourceTree = "<group>"; };
+		607F51D629F43A7F00456824 /* assembled.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = assembled.hpp; sourceTree = "<group>"; };
+		607F51D829F43FD400456824 /* room.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = room.cpp; sourceTree = "<group>"; };
+		607F51D929F43FD400456824 /* room.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = room.hpp; sourceTree = "<group>"; };
+		607F51DB29F4421300456824 /* libglfw.3.3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libglfw.3.3.dylib; path = ../../../../../../usr/local/Cellar/glfw/3.3.8/lib/libglfw.3.3.dylib; sourceTree = "<group>"; };
+		607F51DF29F4422D00456824 /* libGLEW.2.2.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libGLEW.2.2.0.dylib; path = ../../../../../../usr/local/Cellar/glew/2.2.0_1/lib/libGLEW.2.2.0.dylib; sourceTree = "<group>"; };
+		607F51E229F58C4700456824 /* cube_test.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = cube_test.png; sourceTree = "<group>"; };
+		607F51E329F58C4700456824 /* wood.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = wood.jpg; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -32,6 +80,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				607F51DC29F4421300456824 /* libglfw.3.3.dylib in Frameworks */,
+				607F51E029F4422D00456824 /* libGLEW.2.2.0.dylib in Frameworks */,
+				607F51BF29ED630600456824 /* OpenGL.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -41,8 +92,11 @@
 		607F517F29ED60D700456824 = {
 			isa = PBXGroup;
 			children = (
+				607F51CA29ED682D00456824 /* texture */,
+				607F519229ED617E00456824 /* shaders */,
 				607F518A29ED60D700456824 /* cg-2 */,
 				607F518929ED60D700456824 /* Products */,
+				607F51BD29ED630600456824 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -57,9 +111,80 @@
 		607F518A29ED60D700456824 /* cg-2 */ = {
 			isa = PBXGroup;
 			children = (
+				607F51A629ED622B00456824 /* common.h */,
+				607F519A29ED622B00456824 /* tools */,
+				607F51AA29ED622B00456824 /* geometry */,
+				607F519729ED622B00456824 /* scene.cpp */,
+				607F519829ED622B00456824 /* scene.hpp */,
+				607F51D829F43FD400456824 /* room.cpp */,
+				607F51D929F43FD400456824 /* room.hpp */,
+				607F51A829ED622B00456824 /* shader.cpp */,
+				607F51A529ED622B00456824 /* shader.hpp */,
+				607F51A929ED622B00456824 /* shaderReader.cpp */,
+				607F51B029ED622B00456824 /* shaderReader.hpp */,
+				607F51A729ED622B00456824 /* texture.cpp */,
+				607F519929ED622B00456824 /* texture.hpp */,
 				607F518B29ED60D700456824 /* main.cpp */,
 			);
 			path = "cg-2";
+			sourceTree = "<group>";
+		};
+		607F519229ED617E00456824 /* shaders */ = {
+			isa = PBXGroup;
+			children = (
+				607F519329ED617E00456824 /* shape.frag */,
+				607F519529ED617E00456824 /* shape.vert */,
+			);
+			path = shaders;
+			sourceTree = "<group>";
+		};
+		607F519A29ED622B00456824 /* tools */ = {
+			isa = PBXGroup;
+			children = (
+				607F51A129ED622B00456824 /* stb_image.cpp */,
+				607F519F29ED622B00456824 /* stb_image.h */,
+				607F51CF29F1538800456824 /* geoControl.cpp */,
+				607F51D029F1538800456824 /* geoControl.hpp */,
+			);
+			path = tools;
+			sourceTree = "<group>";
+		};
+		607F51AA29ED622B00456824 /* geometry */ = {
+			isa = PBXGroup;
+			children = (
+				607F51AB29ED622B00456824 /* geometry.cpp */,
+				607F51AE29ED622B00456824 /* geometry.hpp */,
+				607F51D229F4369500456824 /* basic.cpp */,
+				607F51D329F4369500456824 /* basic.hpp */,
+				607F51D529F43A7F00456824 /* assembled.cpp */,
+				607F51D629F43A7F00456824 /* assembled.hpp */,
+				607F51AF29ED622B00456824 /* selection.cpp */,
+				607F51AC29ED622B00456824 /* selection.hpp */,
+			);
+			path = geometry;
+			sourceTree = "<group>";
+		};
+		607F51BD29ED630600456824 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				607F51DF29F4422D00456824 /* libGLEW.2.2.0.dylib */,
+				607F51DB29F4421300456824 /* libglfw.3.3.dylib */,
+				607F51BE29ED630600456824 /* OpenGL.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		607F51CA29ED682D00456824 /* texture */ = {
+			isa = PBXGroup;
+			children = (
+				607F51E229F58C4700456824 /* cube_test.png */,
+				607F51E329F58C4700456824 /* wood.jpg */,
+				607F51CB29ED682D00456824 /* camera_rotate.png */,
+				607F51CC29ED682D00456824 /* selection.png */,
+				607F51CD29ED682D00456824 /* move.png */,
+				607F51CE29ED682D00456824 /* magnify.png */,
+			);
+			path = texture;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -119,6 +244,17 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				607F51B129ED622C00456824 /* scene.cpp in Sources */,
+				607F51B829ED622C00456824 /* shader.cpp in Sources */,
+				607F51DA29F43FD400456824 /* room.cpp in Sources */,
+				607F51D129F1538800456824 /* geoControl.cpp in Sources */,
+				607F51BA29ED622C00456824 /* geometry.cpp in Sources */,
+				607F51D429F4369500456824 /* basic.cpp in Sources */,
+				607F51B529ED622C00456824 /* stb_image.cpp in Sources */,
+				607F51BC29ED622C00456824 /* selection.cpp in Sources */,
+				607F51D729F43A7F00456824 /* assembled.cpp in Sources */,
+				607F51B729ED622C00456824 /* texture.cpp in Sources */,
+				607F51B929ED622C00456824 /* shaderReader.cpp in Sources */,
 				607F518C29ED60D700456824 /* main.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -241,6 +377,12 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = QCDQ72S86T;
 				ENABLE_HARDENED_RUNTIME = YES;
+				HEADER_SEARCH_PATHS = /usr/local/include;
+				LIBRARY_SEARCH_PATHS = (
+					/usr/local/lib,
+					/usr/local/Cellar/glfw/3.3.8/lib,
+					/usr/local/Cellar/glew/2.2.0_1/lib,
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Debug;
@@ -251,6 +393,12 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = QCDQ72S86T;
 				ENABLE_HARDENED_RUNTIME = YES;
+				HEADER_SEARCH_PATHS = /usr/local/include;
+				LIBRARY_SEARCH_PATHS = (
+					/usr/local/lib,
+					/usr/local/Cellar/glfw/3.3.8/lib,
+					/usr/local/Cellar/glew/2.2.0_1/lib,
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Release;
