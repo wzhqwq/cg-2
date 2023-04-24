@@ -14,8 +14,6 @@
 class Cube : public Geometry {
 public:
     Cube() : Geometry() {
-        vertices.resize(28);
-        indices.resize(12);
         setup();
         updateBuffer();
     }
@@ -23,9 +21,39 @@ private:
     void setup();
 };
 
+class Sphere : public Geometry {
+public:
+    Sphere(int rotateSubdivision, int axisSubdivision) : Geometry() {
+        setup(rotateSubdivision, axisSubdivision);
+        updateBuffer();
+    }
+private:
+    void setup(int rSub, int aSub);
+};
+
+class Cylinder : public Geometry {
+public:
+    Cylinder(int subdivision) : Geometry() {
+        setup(subdivision);
+        updateBuffer();
+    }
+private:
+    void setup(int sub);
+};
+
+class Cone : public Geometry {
+public:
+    Cone(int subdivision) : Geometry() {
+        setup(subdivision);
+        updateBuffer();
+    }
+private:
+    void setup(int sub);
+};
+
 class Vase : public Geometry {
 public:
-    Vase() : Geometry() {
+    Vase(int subdivision) : Geometry() {
         setup();
         updateBuffer();
     }

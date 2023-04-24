@@ -73,6 +73,7 @@
 		607F51DF29F4422D00456824 /* libGLEW.2.2.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libGLEW.2.2.0.dylib; path = ../../../../../../usr/local/Cellar/glew/2.2.0_1/lib/libGLEW.2.2.0.dylib; sourceTree = "<group>"; };
 		607F51E229F58C4700456824 /* cube_test.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = cube_test.png; sourceTree = "<group>"; };
 		607F51E329F58C4700456824 /* wood.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = wood.jpg; sourceTree = "<group>"; };
+		607F51E429F62B4C00456824 /* earth.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = earth.jpg; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -177,6 +178,7 @@
 		607F51CA29ED682D00456824 /* texture */ = {
 			isa = PBXGroup;
 			children = (
+				607F51E429F62B4C00456824 /* earth.jpg */,
 				607F51E229F58C4700456824 /* cube_test.png */,
 				607F51E329F58C4700456824 /* wood.jpg */,
 				607F51CB29ED682D00456824 /* camera_rotate.png */,

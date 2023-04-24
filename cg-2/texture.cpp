@@ -39,4 +39,5 @@ void initTexture(const char *textureUrl) {
     textures.move = loadTexture(textureUrl, "move.png");
     textures.cubeTest = loadTexture(textureUrl, "cube_test.png");
     textures.wood = loadTexture(textureUrl, "wood.jpg");
+    textures.earth = loadTexture(textureUrl, "earth.jpg");
 }
