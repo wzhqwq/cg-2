@@ -108,13 +108,13 @@ void Cone::setup(int sub) {
     for (int i = 0; i <= sub; i++) {
         float longitude = 2 * Pi * i / sub;
         float x = 0.5f * sin(longitude), z = 0.5f * cos(longitude);
-        vertices.push_back(vec3(0, -0.5f, 0));
+        vertices.push_back(vec3(0, 0, 0));
         vertices.push_back(vec3(texFragX * (i + 0.5f), 1, 0));
         
-        vertices.push_back(vec3(x, -0.5f, z));
+        vertices.push_back(vec3(x, 0, z));
         vertices.push_back(vec3(texFragX * i, 0.5f, 0));
 
-        vertices.push_back(vec3(0, 0.5f, 0));
+        vertices.push_back(vec3(0, 1, 0));
         vertices.push_back(vec3(texFragX * (i + 0.5f), 0, 0));
     }
     for (int i = 0; i < sub; i++) {

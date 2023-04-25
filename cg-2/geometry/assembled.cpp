@@ -112,7 +112,6 @@ void Globe::setup() {
     
     Cone *bottom = new Cone(15);
     bottom->scale(vec3(GLOBE_BOTTOM_W, GLOBE_BOTTOM_H, GLOBE_BOTTOM_W));
-    bottom->translate(vec3(0, GLOBE_BOTTOM_H / 2, 0));
     bottom->currentColor = vec3(0.2, 0.2, 0.2);
     
     Ring *arc = new Ring(10, 15, 1.0f - (GLOBE_ARC_T * 2) / GLOBE_ARC_W, -90.0f, 90.0f);
