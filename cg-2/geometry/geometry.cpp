@@ -21,7 +21,7 @@ void Geometry::paint() {
 void Geometry::setMode(DrawMode mode) {
     switch (mode) {
         case Filled:
-            renderType = GL_TRIANGLE_STRIP;
+            renderType = GL_TRIANGLES;
             break;
         case Outlined:
             renderType = GL_LINE_LOOP;

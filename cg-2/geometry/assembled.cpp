@@ -8,7 +8,8 @@
 #include "assembled.hpp"
 
 void Table::setup() {
-    Cube *top = new Cube(), *leg1 = new Cube(), *leg2 = new Cube(), *leg3 = new Cube(), *leg4 = new Cube();
+    Cube *top = new Cube();
+    Cylinder *leg1 = new Cylinder(8), *leg2 = new Cylinder(8), *leg3 = new Cylinder(8), *leg4 = new Cylinder(8);
     top->texture = textures.wood;
     top->renderMode = TexPure;
     leg1->texture = textures.wood;
@@ -40,7 +41,8 @@ void Table::setup() {
 }
 
 void Chair::setup() {
-    Cube *top = new Cube(), *leg1 = new Cube(), *leg2 = new Cube(), *leg3 = new Cube(), *leg4 = new Cube();
+    Cube *top = new Cube();
+    Cylinder *leg1 = new Cylinder(8), *leg2 = new Cylinder(8), *leg3 = new Cylinder(8), *leg4 = new Cylinder(8);
     top->texture = textures.wood;
     top->renderMode = TexPure;
     leg1->texture = textures.wood;
@@ -70,7 +72,8 @@ void Chair::setup() {
     addObject(leg3);
     addObject(leg4);
     
-    Cube *back = new Cube(), *rod1 = new Cube(), *rod2 = new Cube();
+    Cube *back = new Cube();
+    Cylinder *rod1 = new Cylinder(8), *rod2 = new Cylinder(8);
     back->texture = textures.wood;
     back->renderMode = TexPure;
     rod1->texture = textures.wood;
@@ -97,4 +100,37 @@ void Chair::setup() {
     addObject(back);
     addObject(rod1);
     addObject(rod2);
+}
+
+void Globe::setup() {
+    Sphere *ball = new Sphere(20, 20);
+    ball->scale(vec3(GLOBE_BALL_W));
+    ball->rotate(GLOBE_BALL_R, vec3(0, 0, 1));
+    ball->translate(vec3(0, GLOBE_BALL_H, 0));
+    ball->renderMode = TexPure;
+    ball->texture = textures.earth;
+    
+    Cone *bottom = new Cone(15);
+    bottom->scale(vec3(GLOBE_BOTTOM_W, GLOBE_BOTTOM_H, GLOBE_BOTTOM_W));
+    bottom->translate(vec3(0, GLOBE_BOTTOM_H / 2, 0));
+    bottom->currentColor = vec3(0.2, 0.2, 0.2);
+    
+    Ring *arc = new Ring(10, 15, 1.0f - (GLOBE_ARC_T * 2) / GLOBE_ARC_W, -90.0f, 90.0f);
+    arc->scale(vec3(GLOBE_ARC_W));
+    arc->rotate(pi<float>() / 2, vec3(1, 0, 0));
+    arc->rotate(GLOBE_BALL_R, vec3(0, 0, 1));
+    arc->translate(vec3(0, GLOBE_BALL_H, 0));
+    arc->currentColor = vec3(0.1, 0.1, 0.1);
+
+    
+    Cylinder *rod = new Cylinder(15);
+    rod->scale(vec3(GLOBE_ROD_T, GLOBE_ARC_W, GLOBE_ROD_T));
+    rod->rotate(GLOBE_BALL_R, vec3(0, 0, 1));
+    rod->translate(vec3(0, GLOBE_BALL_H, 0));
+    rod->currentColor = vec3(0.1, 0.1, 0.1);
+    
+    addObject(ball);
+    addObject(bottom);
+    addObject(arc);
+    addObject(rod);
 }

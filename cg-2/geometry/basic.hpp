@@ -51,6 +51,17 @@ private:
     void setup(int sub);
 };
 
+class Ring : public Geometry {
+public:
+    Ring(int circleSubdivision, int arcSubdivision, float inset) : Ring(circleSubdivision, arcSubdivision, inset, 0, 360) {};
+    Ring(int circleSubdivision, int arcSubdivision, float inset, float startAngle, float endAngle) {
+        setup(circleSubdivision, arcSubdivision, inset, startAngle * pi<float>() / 180, endAngle * pi<float>() / 180);
+        updateBuffer();
+    }
+private:
+    void setup(int cSub, int aSub, float inset, float start, float end);
+};
+
 class Vase : public Geometry {
 public:
     Vase(int subdivision) : Geometry() {

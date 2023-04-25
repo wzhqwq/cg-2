@@ -12,7 +12,7 @@
 #include "common.h"
 
 struct Textures {
-    GLuint selection, move, magnifier, cameraRotate, cubeTest, wood, earth;
+    GLuint selection, move, magnifier, cameraRotate, cubeTest, wood, earth, chessboard;
 };
 
 GLuint loadTexture(const char *textureUrl, const char *fileName);
