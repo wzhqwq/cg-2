@@ -28,6 +28,7 @@ void buildRoom() {
     mainScene->objects.push_back(globe);
     
     Vase *vase = new Vase(15, 6);
+    vase->scale(vec3(0.8f));
     vase->translate(vec3(-0.6f, table->sy, 0));
     vase->renderMode = TexPure;
     vase->texture = textures.marble;

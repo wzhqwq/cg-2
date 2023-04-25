@@ -19,7 +19,7 @@
 #define TABLE_LEG_W 0.15f
 
 #define CHAIR_H_1 0.8f
-#define CHAIR_H_2 1.8f
+#define CHAIR_H_2 1.4f
 #define CHAIR_SIT_SURFACE_W 0.8f
 #define CHAIR_SIT_SURFACE_H 0.15f
 #define CHAIR_LEG_W 0.1f

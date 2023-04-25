@@ -193,46 +193,56 @@ vec2 vaseCurve6[] = {
 };
 
 void Vase::setup(int rSub, int bSub) {
-    float texFragX = 1.0f / rSub, texFragY = 1.0f / bSub / 4;
+    float texFragX = 1.0f / rSub, texFragY = 0.04f;
     float Pi = pi<float>();
+    float sub2 = 2.0f / bSub, sub3 = 3.0f / bSub, sub5 = 5.0f / bSub;
     for (int i = 0; i <= rSub; i++) {
         float angle = 2 * Pi * i / rSub;
+        // 底盘+2
         vertices.push_back(vec3(0, 0, 0));
         vertices.push_back(vec3(texFragX * (i + 0.5f), 0, 0));
         // 外部
+        // 下段+3
         for (int j = 0; j < bSub; j++) {
             vec4 point = vec4(quadricBezier(vaseCurve1, 1.0f * j / bSub), 0, 0);
             vertices.push_back(vec3(glm::rotate(mat4(1), angle, vec3(0, 1, 0)) * point));
-            vertices.push_back(vec3(texFragX * i, 0.25f + texFragY * j, 0));
+            vertices.push_back(vec3(texFragX * i, texFragY * (j * sub3 + 2), 0));
         }
+        // 中段+5
         for (int j = 0; j < bSub; j++) {
             vec4 point = vec4(cubicBezier(vaseCurve2, 1.0f * j / bSub), 0, 0);
             vertices.push_back(vec3(glm::rotate(mat4(1), angle, vec3(0, 1, 0)) * point));
-            vertices.push_back(vec3(texFragX * i, 0.5f + texFragY * j, 0));
+            vertices.push_back(vec3(texFragX * i, texFragY * (j * sub5 + 5), 0));
         }
+        // 上段+2
         for (int j = 0; j <= bSub; j++) {
             vec4 point = vec4(quadricBezier(vaseCurve3, 1.0f * j / bSub), 0, 0);
             vertices.push_back(vec3(glm::rotate(mat4(1), angle, vec3(0, 1, 0)) * point));
-            vertices.push_back(vec3(texFragX * i, 0.75f + texFragY * j, 0));
+            vertices.push_back(vec3(texFragX * i, texFragY * (j * sub2 + 10), 0));
         }
+        // 边缘+1
         // 内部
+        // 上段+2
         for (int j = 0; j < bSub; j++) {
             vec4 point = vec4(quadricBezier(vaseCurve4, 1.0f * j / bSub), 0, 0);
             vertices.push_back(vec3(glm::rotate(mat4(1), angle, vec3(0, 1, 0)) * point));
-            vertices.push_back(vec3(texFragX * i, 1.0f - texFragY * j, 0));
+            vertices.push_back(vec3(texFragX * i, texFragY * (j * sub2 + 13), 0));
         }
+        // 中段+5
         for (int j = 0; j < bSub; j++) {
             vec4 point = vec4(cubicBezier(vaseCurve5, 1.0f * j / bSub), 0, 0);
             vertices.push_back(vec3(glm::rotate(mat4(1), angle, vec3(0, 1, 0)) * point));
-            vertices.push_back(vec3(texFragX * i, 0.75f - texFragY * j, 0));
+            vertices.push_back(vec3(texFragX * i, texFragY * (j * sub5 + 15), 0));
         }
+        // 下段+3
         for (int j = 0; j <= bSub; j++) {
             vec4 point = vec4(quadricBezier(vaseCurve6, 1.0f * j / bSub), 0, 0);
             vertices.push_back(vec3(glm::rotate(mat4(1), angle, vec3(0, 1, 0)) * point));
-            vertices.push_back(vec3(texFragX * i, 0.5f - texFragY * j, 0));
+            vertices.push_back(vec3(texFragX * i, texFragY * (j * sub3 + 20), 0));
         }
+        // 底盘+2
         vertices.push_back(vec3(0, 0.02f, 0));
-        vertices.push_back(vec3(texFragX * (i + 0.5f), 0, 0));
+        vertices.push_back(vec3(texFragX * (i + 0.5f), 1, 0));
     }
     int aSub = bSub * 6 + 3;
     for (int i = 0; i < rSub; i++) {
