@@ -24,6 +24,12 @@ void buildRoom() {
     mainScene->objects.push_back(chair);
     
     Globe *globe = new Globe();
-    globe->translate(vec3(0, table->sy, 0));
+    globe->translate(vec3(0.4f, table->sy, 0));
     mainScene->objects.push_back(globe);
+    
+    Vase *vase = new Vase(15, 6);
+    vase->translate(vec3(-0.6f, table->sy, 0));
+    vase->renderMode = TexPure;
+    vase->texture = textures.marble;
+    mainScene->objects.push_back(vase);
 }

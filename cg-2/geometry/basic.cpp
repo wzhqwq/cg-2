@@ -156,3 +156,92 @@ void Ring::setup(int cSub, int aSub, float inset, float start, float end) {
         addFrag(offset + aSub + 1, nextOffset + aSub + 1, offset + aSub + 2);
     }
 }
+
+// 外层
+vec2 vaseCurve1[] = {
+    vec2(0.2f, 0.0f),
+    vec2(0.3f, 0.1f),
+    vec2(0.3f, 0.3f),
+};
+vec2 vaseCurve2[] = {
+    vec2(0.3f, 0.3f),
+    vec2(0.3f, 0.5f),
+    vec2(0.1f, 0.6f),
+    vec2(0.1f, 0.8f),
+};
+vec2 vaseCurve3[] = {
+    vec2(0.1f, 0.8f),
+    vec2(0.1f, 0.9f),
+    vec2(0.2f, 1.0f),
+};
+// 内层
+vec2 vaseCurve4[] = {
+    vec2(0.18f, 1.0f),
+    vec2(0.08f, 0.9f),
+    vec2(0.08f, 0.8f),
+};
+vec2 vaseCurve5[] = {
+    vec2(0.08f, 0.8f),
+    vec2(0.08f, 0.6f),
+    vec2(0.28f, 0.5f),
+    vec2(0.28f, 0.3f),
+};
+vec2 vaseCurve6[] = {
+    vec2(0.28f, 0.3f),
+    vec2(0.28f, 0.1f),
+    vec2(0.2f, 0.02f),
+};
+
+void Vase::setup(int rSub, int bSub) {
+    float texFragX = 1.0f / rSub, texFragY = 1.0f / bSub / 4;
+    float Pi = pi<float>();
+    for (int i = 0; i <= rSub; i++) {
+        float angle = 2 * Pi * i / rSub;
+        vertices.push_back(vec3(0, 0, 0));
+        vertices.push_back(vec3(texFragX * (i + 0.5f), 0, 0));
+        // 外部
+        for (int j = 0; j < bSub; j++) {
+            vec4 point = vec4(quadricBezier(vaseCurve1, 1.0f * j / bSub), 0, 0);
+            vertices.push_back(vec3(glm::rotate(mat4(1), angle, vec3(0, 1, 0)) * point));
+            vertices.push_back(vec3(texFragX * i, 0.25f + texFragY * j, 0));
+        }
+        for (int j = 0; j < bSub; j++) {
+            vec4 point = vec4(cubicBezier(vaseCurve2, 1.0f * j / bSub), 0, 0);
+            vertices.push_back(vec3(glm::rotate(mat4(1), angle, vec3(0, 1, 0)) * point));
+            vertices.push_back(vec3(texFragX * i, 0.5f + texFragY * j, 0));
+        }
+        for (int j = 0; j <= bSub; j++) {
+            vec4 point = vec4(quadricBezier(vaseCurve3, 1.0f * j / bSub), 0, 0);
+            vertices.push_back(vec3(glm::rotate(mat4(1), angle, vec3(0, 1, 0)) * point));
+            vertices.push_back(vec3(texFragX * i, 0.75f + texFragY * j, 0));
+        }
+        // 内部
+        for (int j = 0; j < bSub; j++) {
+            vec4 point = vec4(quadricBezier(vaseCurve4, 1.0f * j / bSub), 0, 0);
+            vertices.push_back(vec3(glm::rotate(mat4(1), angle, vec3(0, 1, 0)) * point));
+            vertices.push_back(vec3(texFragX * i, 1.0f - texFragY * j, 0));
+        }
+        for (int j = 0; j < bSub; j++) {
+            vec4 point = vec4(cubicBezier(vaseCurve5, 1.0f * j / bSub), 0, 0);
+            vertices.push_back(vec3(glm::rotate(mat4(1), angle, vec3(0, 1, 0)) * point));
+            vertices.push_back(vec3(texFragX * i, 0.75f - texFragY * j, 0));
+        }
+        for (int j = 0; j <= bSub; j++) {
+            vec4 point = vec4(quadricBezier(vaseCurve6, 1.0f * j / bSub), 0, 0);
+            vertices.push_back(vec3(glm::rotate(mat4(1), angle, vec3(0, 1, 0)) * point));
+            vertices.push_back(vec3(texFragX * i, 0.5f - texFragY * j, 0));
+        }
+        vertices.push_back(vec3(0, 0.02f, 0));
+        vertices.push_back(vec3(texFragX * (i + 0.5f), 0, 0));
+    }
+    int aSub = bSub * 6 + 3;
+    for (int i = 0; i < rSub; i++) {
+        int offset = (aSub + 1) * i;
+        int nextOffset = offset + (aSub + 1);
+        addFrag(offset, nextOffset + 1, offset + 1);
+        for (int j = 0; j < aSub - 1; j++) {
+            addFrag(offset + j, nextOffset + j, nextOffset + j + 1, offset + j + 1);
+        }
+        addFrag(offset + aSub - 1, nextOffset + aSub - 1, offset + aSub);
+    }
+}

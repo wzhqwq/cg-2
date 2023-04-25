@@ -10,6 +10,7 @@
 
 #include "common.h"
 #include "geometry.hpp"
+#include "bezier.hpp"
 
 class Cube : public Geometry {
 public:
@@ -64,12 +65,12 @@ private:
 
 class Vase : public Geometry {
 public:
-    Vase(int subdivision) : Geometry() {
-        setup();
+    Vase(int rotateSubdivision, int bezierSubdivision) : Geometry() {
+        setup(rotateSubdivision, bezierSubdivision);
         updateBuffer();
     }
 private:
-    void setup();
+    void setup(int rSub, int bSub);
 };
 
 #endif /* basic_hpp */
