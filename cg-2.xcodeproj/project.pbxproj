@@ -23,6 +23,7 @@
 		607F51DC29F4421300456824 /* libglfw.3.3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 607F51DB29F4421300456824 /* libglfw.3.3.dylib */; };
 		607F51E029F4422D00456824 /* libGLEW.2.2.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 607F51DF29F4422D00456824 /* libGLEW.2.2.0.dylib */; };
 		607F51E829F7A74700456824 /* bezier.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 607F51E629F7A74700456824 /* bezier.cpp */; };
+		607F51EF29F8A65D00456824 /* outterObject.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 607F51ED29F8A65D00456824 /* outterObject.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -79,6 +80,10 @@
 		607F51E629F7A74700456824 /* bezier.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = bezier.cpp; sourceTree = "<group>"; };
 		607F51E729F7A74700456824 /* bezier.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = bezier.hpp; sourceTree = "<group>"; };
 		607F51E929F7D5C900456824 /* marble.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = marble.jpg; sourceTree = "<group>"; };
+		607F51EB29F8A58500456824 /* Slime.obj */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Slime.obj; sourceTree = "<group>"; };
+		607F51EC29F8A58500456824 /* Slime.mtl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Slime.mtl; sourceTree = "<group>"; };
+		607F51ED29F8A65D00456824 /* outterObject.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = outterObject.cpp; sourceTree = "<group>"; };
+		607F51EE29F8A65D00456824 /* outterObject.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = outterObject.hpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -98,6 +103,7 @@
 		607F517F29ED60D700456824 = {
 			isa = PBXGroup;
 			children = (
+				607F51EA29F8A58500456824 /* object */,
 				607F51CA29ED682D00456824 /* texture */,
 				607F519229ED617E00456824 /* shaders */,
 				607F518A29ED60D700456824 /* cg-2 */,
@@ -130,6 +136,8 @@
 				607F51B029ED622B00456824 /* shaderReader.hpp */,
 				607F51A729ED622B00456824 /* texture.cpp */,
 				607F519929ED622B00456824 /* texture.hpp */,
+				607F51ED29F8A65D00456824 /* outterObject.cpp */,
+				607F51EE29F8A65D00456824 /* outterObject.hpp */,
 				607F518B29ED60D700456824 /* main.cpp */,
 			);
 			path = "cg-2";
@@ -198,6 +206,15 @@
 			path = texture;
 			sourceTree = "<group>";
 		};
+		607F51EA29F8A58500456824 /* object */ = {
+			isa = PBXGroup;
+			children = (
+				607F51EB29F8A58500456824 /* Slime.obj */,
+				607F51EC29F8A58500456824 /* Slime.mtl */,
+			);
+			path = object;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -258,6 +275,7 @@
 				607F51B129ED622C00456824 /* scene.cpp in Sources */,
 				607F51B829ED622C00456824 /* shader.cpp in Sources */,
 				607F51DA29F43FD400456824 /* room.cpp in Sources */,
+				607F51EF29F8A65D00456824 /* outterObject.cpp in Sources */,
 				607F51D129F1538800456824 /* geoControl.cpp in Sources */,
 				607F51BA29ED622C00456824 /* geometry.cpp in Sources */,
 				607F51D429F4369500456824 /* basic.cpp in Sources */,

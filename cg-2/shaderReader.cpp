@@ -23,9 +23,7 @@ char *readFromFile(const char *fileName) {
     return buf;
 }
 
-void loadVertexShader(const char *baseUrl, const char *fileName, GLuint program) {
-    char path[255];
-    snprintf(path, 255, "%s/%s", baseUrl, fileName);
+void loadVertexShader(const char *path, GLuint program) {
     GLchar *src = readFromFile(path);
 
     GLuint shader = glCreateShader(GL_VERTEX_SHADER);
@@ -47,9 +45,7 @@ void loadVertexShader(const char *baseUrl, const char *fileName, GLuint program)
     glAttachShader(program, shader);
 }
 
-void loadFragmentShader(const char *baseUrl, const char *fileName, GLuint program) {
-    char path[255];
-    snprintf(path, 255, "%s/%s", baseUrl, fileName);
+void loadFragmentShader(const char *path, GLuint program) {
     GLchar *src = readFromFile(path);
 
     GLuint shader = glCreateShader(GL_FRAGMENT_SHADER);

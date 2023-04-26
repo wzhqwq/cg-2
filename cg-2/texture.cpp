@@ -9,12 +9,9 @@
 
 Textures textures;
 
-GLuint loadTexture(const char *textureUrl, const char *fileName) {
-    char path[255];
-    snprintf(path, 255, "%s/%s", textureUrl, fileName);
-    
+GLuint loadTexture(string path) {
     int width, height, nrChannels;
-    unsigned char *data = stbi_load(path, &width, &height, &nrChannels, STBI_rgb_alpha);
+    unsigned char *data = stbi_load(path.c_str(), &width, &height, &nrChannels, STBI_rgb_alpha);
     if (!data) return 0;
     
     GLuint texture;
@@ -32,14 +29,15 @@ GLuint loadTexture(const char *textureUrl, const char *fileName) {
     return texture;
 }
 
-void initTexture(const char *textureUrl) {
-    textures.selection = loadTexture(textureUrl, "selection.png");
-    textures.cameraRotate = loadTexture(textureUrl, "camera_rotate.png");
-    textures.magnifier = loadTexture(textureUrl, "magnify.png");
-    textures.move = loadTexture(textureUrl, "move.png");
-    textures.cubeTest = loadTexture(textureUrl, "cube_test.png");
-    textures.wood = loadTexture(textureUrl, "wood.jpg");
-    textures.earth = loadTexture(textureUrl, "earth.jpg");
-    textures.chessboard = loadTexture(textureUrl, "chessboard.jpg");
-    textures.marble = loadTexture(textureUrl, "marble.jpg");
+void initTexture(string basePath) {
+    basePath += "/texture/";
+    textures.selection = loadTexture(basePath + "selection.png");
+    textures.cameraRotate = loadTexture(basePath + "camera_rotate.png");
+    textures.magnifier = loadTexture(basePath + "magnify.png");
+    textures.move = loadTexture(basePath + "move.png");
+    textures.cubeTest = loadTexture(basePath + "cube_test.png");
+    textures.wood = loadTexture(basePath + "wood.jpg");
+    textures.earth = loadTexture(basePath + "earth.jpg");
+    textures.chessboard = loadTexture(basePath + "chessboard.jpg");
+    textures.marble = loadTexture(basePath + "marble.jpg");
 }

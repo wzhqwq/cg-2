@@ -10,13 +10,16 @@
 
 #include "stb_image.h"
 #include "common.h"
+#include <string>
+
+using namespace std;
 
 struct Textures {
     GLuint selection, move, magnifier, cameraRotate, cubeTest, wood, earth, chessboard, marble;
 };
 
-GLuint loadTexture(const char *textureUrl, const char *fileName);
-void initTexture(const char *textureUrl);
+GLuint loadTexture(string path);
+void initTexture(string basePath);
 
 extern Textures textures;
 

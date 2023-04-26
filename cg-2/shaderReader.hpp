@@ -11,7 +11,7 @@
 #include "common.h"
 
 char *readFromFile(const char *fileName);
-void loadVertexShader(const char *baseUrl, const char *fileName, GLuint program);
-void loadFragmentShader(const char *baseUrl, const char *fileName, GLuint program);
+void loadVertexShader(const char *path, GLuint program);
+void loadFragmentShader(const char *path, GLuint program);
 
 #endif /* shaderReader_hpp */

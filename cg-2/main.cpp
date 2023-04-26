@@ -109,7 +109,7 @@ int main(int argc, char * argv[]) {
     mainScene->moveTo(vec3(camDist * sin(camAngle), camHeight, camDist * cos(camAngle)));
     fixedScene = new Scene(WIDTH, HEIGHT);
     loadShaders(argv[1]);
-    initTexture(argv[2]);
+    initTexture(argv[1]);
     
     buildRoom();
     

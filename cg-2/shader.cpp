@@ -9,10 +9,10 @@
 
 Programs programs;
 
-GLuint loadProgram(const char *shaderDir, const char *vert, const char *frag) {
+GLuint loadProgram(string vert, string frag) {
     GLuint program = glCreateProgram();
-    loadVertexShader(shaderDir, vert, program);
-    loadFragmentShader(shaderDir, frag, program);
+    loadVertexShader(vert.c_str(), program);
+    loadFragmentShader(frag.c_str(), program);
     glLinkProgram(program);
     
     char log[1000];
@@ -26,7 +26,8 @@ GLuint loadProgram(const char *shaderDir, const char *vert, const char *frag) {
     return program;
 }
 
-void initPrograms(const char *shaderDir) {
-    programs.shapeProgram = loadProgram(shaderDir, "shape.vert", "shape.frag");
-    programs.fixedProgram = loadProgram(shaderDir, "shape.vert", "shape.frag");
+void initPrograms(string basePath) {
+    basePath += "/shaders/";
+    programs.shapeProgram = loadProgram(basePath + "shape.vert", basePath + "shape.frag");
+    programs.fixedProgram = loadProgram(basePath + "shape.vert", basePath + "shape.frag");
 }
