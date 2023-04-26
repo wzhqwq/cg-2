@@ -62,6 +62,7 @@ protected:
     // must in anticlockwise
     void addFrag(unsigned int a, unsigned int b, unsigned int c);
     void addFrag(unsigned int a, unsigned int b, unsigned int c, unsigned int d);
+    void addVert(const vec3 &vertPos, const vec2 &fragPos, const vec3 &normal);
     
     GLuint VAO;
     GLuint vertexBuffer, indexBuffer;

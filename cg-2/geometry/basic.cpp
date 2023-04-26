@@ -9,37 +9,23 @@
 
 void Cube::setup() {
     // 采用纸盒展开的贴图，下半部分顶点
-    vertices.push_back(vec3(-0.5, -0.5, -0.5));
-    vertices.push_back(vec3(0.25, 0.25, 0));
-    vertices.push_back(vec3(-0.5, -0.5, 0.5));
-    vertices.push_back(vec3(0.25, 0.5, 0));
-    vertices.push_back(vec3(0.5, -0.5, 0.5));
-    vertices.push_back(vec3(0.5, 0.5, 0));
-    vertices.push_back(vec3(0.5, -0.5, -0.5));
-    vertices.push_back(vec3(0.5, 0.25, 0));
+    addVert(vec3(-0.5, -0.5, -0.5), vec2(0.25, 0.25), vec3(0, 0, 0));
+    addVert(vec3(-0.5, -0.5, 0.5), vec2(0.25, 0.5), vec3(0, 0, 0));
+    addVert(vec3(0.5, -0.5, 0.5), vec2(0.5, 0.5), vec3(0, 0, 0));
+    addVert(vec3(0.5, -0.5, -0.5), vec2(0.5, 0.25), vec3(0, 0, 0));
     // 上半部分顶点
-    vertices.push_back(vec3(-0.5, 0.5, -0.5));
-    vertices.push_back(vec3(0, 0.25, 0));
-    vertices.push_back(vec3(-0.5, 0.5, 0.5));
-    vertices.push_back(vec3(0, 0.5, 0));
-    vertices.push_back(vec3(0.5, 0.5, 0.5));
-    vertices.push_back(vec3(0.75, 0.5, 0));
-    vertices.push_back(vec3(0.5, 0.5, -0.5));
-    vertices.push_back(vec3(0.75, 0.25, 0));
+    addVert(vec3(-0.5, 0.5, -0.5), vec2(0, 0.25), vec3(0, 0, 0));
+    addVert(vec3(-0.5, 0.5, 0.5), vec2(0, 0.5), vec3(0, 0, 0));
+    addVert(vec3(0.5, 0.5, 0.5), vec2(0.75, 0.5), vec3(0, 0, 0));
+    addVert(vec3(0.5, 0.5, -0.5), vec2(0.75, 0.25), vec3(0, 0, 0));
     // 然后是两翼，两侧顶点
-    vertices.push_back(vec3(-0.5, 0.5, -0.5));
-    vertices.push_back(vec3(0.25, 0, 0));
-    vertices.push_back(vec3(-0.5, 0.5, 0.5));
-    vertices.push_back(vec3(0.25, 0.75, 0));
-    vertices.push_back(vec3(0.5, 0.5, 0.5));
-    vertices.push_back(vec3(0.5, 0.75, 0));
-    vertices.push_back(vec3(0.5, 0.5, -0.5));
-    vertices.push_back(vec3(0.5, 0, 0));
+    addVert(vec3(-0.5, 0.5, -0.5), vec2(0.25, 0), vec3(0, 0, 0));
+    addVert(vec3(-0.5, 0.5, 0.5), vec2(0.25, 0.75), vec3(0, 0, 0));
+    addVert(vec3(0.5, 0.5, 0.5), vec2(0.5, 0.75), vec3(0, 0, 0));
+    addVert(vec3(0.5, 0.5, -0.5), vec2(0.5, 0), vec3(0, 0, 0));
     // 接缝处
-    vertices.push_back(vec3(-0.5, 0.5, -0.5));
-    vertices.push_back(vec3(1, 0.25, 0));
-    vertices.push_back(vec3(-0.5, 0.5, 0.5));
-    vertices.push_back(vec3(1, 0.5, 0));
+    addVert(vec3(-0.5, 0.5, -0.5), vec2(1, 0.25), vec3(0, 0, 0));
+    addVert(vec3(-0.5, 0.5, 0.5), vec2(1, 0.5), vec3(0, 0, 0));
     
     addFrag(3, 2, 1, 0);
     addFrag(2, 3, 7, 6);
@@ -55,15 +41,14 @@ void Sphere::setup(int rSub, int aSub) {
     for (int i = 0; i <= rSub; i++) {
         float longitude = 2 * Pi * i / rSub;
         float x = 0.5f * sin(longitude), z = 0.5f * cos(longitude);
-        vertices.push_back(vec3(0, -0.5f, 0));
-        vertices.push_back(vec3(texFragX * (i + 0.5f), 1, 0));
+        addVert(vec3(0, -0.5f, 0), vec2(texFragX * (i + 0.5f), 1), vec3(0, 0, 0));
         for (int j = 1; j < aSub; j++) {
             float latitude = Pi * ((float) j / aSub - 0.5f);
-            vertices.push_back(vec3(x * cos(latitude), 0.5f * sin(latitude), z * cos(latitude)));
-            vertices.push_back(vec3(texFragX * i, 1.0f - texFragY * j, 0));
+            addVert(vec3(x * cos(latitude), 0.5f * sin(latitude), z * cos(latitude)),
+                    vec2(texFragX * i, 1.0f - texFragY * j),
+                    vec3(0, 0, 0));
         }
-        vertices.push_back(vec3(0, 0.5f, 0));
-        vertices.push_back(vec3(texFragX * (i + 0.5f), 0, 0));
+        addVert(vec3(0, 0.5f, 0), vec2(texFragX * (i + 0.5f), 0), vec3(0, 0, 0));
     }
     for (int i = 0; i < rSub; i++) {
         int offset = (aSub + 1) * i;
@@ -82,16 +67,12 @@ void Cylinder::setup(int sub) {
     for (int i = 0; i <= sub; i++) {
         float longitude = 2 * Pi * i / sub;
         float x = 0.5f * sin(longitude), z = 0.5f * cos(longitude);
-        vertices.push_back(vec3(0, -0.5f, 0));
-        vertices.push_back(vec3(texFragX * (i + 0.5f), 1, 0));
+        addVert(vec3(0, -0.5f, 0), vec2(texFragX * (i + 0.5f), 1), vec3(0, 0, 0));
         
-        vertices.push_back(vec3(x, -0.5f, z));
-        vertices.push_back(vec3(texFragX * i, 2.0f / 3, 0));
-        vertices.push_back(vec3(x, 0.5f, z));
-        vertices.push_back(vec3(texFragX * i, 1.0f / 3, 0));
+        addVert(vec3(x, -0.5f, z), vec2(texFragX * i, 2.0f / 3), vec3(0, 0, 0));
+        addVert(vec3(x, 0.5f, z), vec2(texFragX * i, 1.0f / 3), vec3(0, 0, 0));
 
-        vertices.push_back(vec3(0, 0.5f, 0));
-        vertices.push_back(vec3(texFragX * (i + 0.5f), 0, 0));
+        addVert(vec3(0, 0.5f, 0), vec2(texFragX * (i + 0.5f), 0), vec3(0, 0, 0));
     }
     for (int i = 0; i < sub; i++) {
         int offset = i * 4;
@@ -108,14 +89,11 @@ void Cone::setup(int sub) {
     for (int i = 0; i <= sub; i++) {
         float longitude = 2 * Pi * i / sub;
         float x = 0.5f * sin(longitude), z = 0.5f * cos(longitude);
-        vertices.push_back(vec3(0, 0, 0));
-        vertices.push_back(vec3(texFragX * (i + 0.5f), 1, 0));
+        addVert(vec3(0, 0, 0), vec2(texFragX * (i + 0.5f), 1), vec3(0, 0, 0));
         
-        vertices.push_back(vec3(x, 0, z));
-        vertices.push_back(vec3(texFragX * i, 0.5f, 0));
+        addVert(vec3(x, 0, z), vec2(texFragX * i, 0.5f), vec3(0, 0, 0));
 
-        vertices.push_back(vec3(0, 1, 0));
-        vertices.push_back(vec3(texFragX * (i + 0.5f), 0, 0));
+        addVert(vec3(0, 1, 0), vec2(texFragX * (i + 0.5f), 0), vec3(0, 0, 0));
     }
     for (int i = 0; i < sub; i++) {
         int offset = i * 3;
@@ -133,18 +111,21 @@ void Ring::setup(int cSub, int aSub, float inset, float start, float end) {
     for (int i = 0; i <= cSub; i++) {
         float longitude = 2 * Pi * i / cSub;
         vec4 pos = vec4(r * sin(longitude) + R, r * cos(longitude), 0, 0);
-        vertices.push_back(vec3(R * cos(-start), 0, R * sin(-start)));
-        vertices.push_back(vec3(texFragX * (i + 0.5f), 1, 0));
+        addVert(vec3(R * cos(-start), 0, R * sin(-start)),
+                vec2(texFragX * (i + 0.5f), 1),
+                vec3(0, 0, 0));
         // 1 ~ aSub+1
         for (int j = 0; j <= aSub; j++) {
             float angle = start + (end - start) * j / aSub;
             // 将xy平面上的圆形样条沿弧旋转
-            vertices.push_back(vec3(glm::rotate(mat4(1), angle, vec3(0, 1, 0)) * pos));
-            vertices.push_back(vec3(texFragX * i, 1.0f - texFragY * j, 0));
+            addVert(vec3(glm::rotate(mat4(1), angle, vec3(0, 1, 0)) * pos),
+                    vec2(texFragX * i, 1.0f - texFragY * j),
+                    vec3(0, 0, 0));
         }
         // aSub+2
-        vertices.push_back(vec3(R * cos(-end), 0, R * sin(-end)));
-        vertices.push_back(vec3(texFragX * (i + 0.5f), 0, 0));
+        addVert(vec3(R * cos(-end), 0, R * sin(-end)),
+                vec2(texFragX * (i + 0.5f), 0),
+                vec3(0, 0, 0));
     }
     for (int i = 0; i < cSub; i++) {
         int offset = (aSub + 3) * i;
@@ -199,50 +180,54 @@ void Vase::setup(int rSub, int bSub) {
     for (int i = 0; i <= rSub; i++) {
         float angle = 2 * Pi * i / rSub;
         // 底盘+2
-        vertices.push_back(vec3(0, 0, 0));
-        vertices.push_back(vec3(texFragX * (i + 0.5f), 0, 0));
+        addVert(vec3(0, 0, 0), vec2(texFragX * (i + 0.5f), 0), vec3(0, 0, 0));
         // 外部
         // 下段+3
         for (int j = 0; j < bSub; j++) {
             vec4 point = vec4(quadricBezier(vaseCurve1, 1.0f * j / bSub), 0, 0);
-            vertices.push_back(vec3(glm::rotate(mat4(1), angle, vec3(0, 1, 0)) * point));
-            vertices.push_back(vec3(texFragX * i, texFragY * (j * sub3 + 2), 0));
+            addVert(vec3(glm::rotate(mat4(1), angle, vec3(0, 1, 0)) * point),
+                    vec2(texFragX * i, texFragY * (j * sub3 + 2)),
+                    vec3(0, 0, 0));
         }
         // 中段+5
         for (int j = 0; j < bSub; j++) {
             vec4 point = vec4(cubicBezier(vaseCurve2, 1.0f * j / bSub), 0, 0);
-            vertices.push_back(vec3(glm::rotate(mat4(1), angle, vec3(0, 1, 0)) * point));
-            vertices.push_back(vec3(texFragX * i, texFragY * (j * sub5 + 5), 0));
+            addVert(vec3(glm::rotate(mat4(1), angle, vec3(0, 1, 0)) * point),
+                    vec2(texFragX * i, texFragY * (j * sub5 + 5)),
+                    vec3(0, 0, 0));
         }
         // 上段+2
         for (int j = 0; j <= bSub; j++) {
             vec4 point = vec4(quadricBezier(vaseCurve3, 1.0f * j / bSub), 0, 0);
-            vertices.push_back(vec3(glm::rotate(mat4(1), angle, vec3(0, 1, 0)) * point));
-            vertices.push_back(vec3(texFragX * i, texFragY * (j * sub2 + 10), 0));
+            addVert(vec3(glm::rotate(mat4(1), angle, vec3(0, 1, 0)) * point),
+                    vec2(texFragX * i, texFragY * (j * sub2 + 10)),
+                    vec3(0, 0, 0));
         }
         // 边缘+1
         // 内部
         // 上段+2
         for (int j = 0; j < bSub; j++) {
             vec4 point = vec4(quadricBezier(vaseCurve4, 1.0f * j / bSub), 0, 0);
-            vertices.push_back(vec3(glm::rotate(mat4(1), angle, vec3(0, 1, 0)) * point));
-            vertices.push_back(vec3(texFragX * i, texFragY * (j * sub2 + 13), 0));
+            addVert(vec3(glm::rotate(mat4(1), angle, vec3(0, 1, 0)) * point),
+                    vec2(texFragX * i, texFragY * (j * sub2 + 13)),
+                    vec3(0, 0, 0));
         }
         // 中段+5
         for (int j = 0; j < bSub; j++) {
             vec4 point = vec4(cubicBezier(vaseCurve5, 1.0f * j / bSub), 0, 0);
-            vertices.push_back(vec3(glm::rotate(mat4(1), angle, vec3(0, 1, 0)) * point));
-            vertices.push_back(vec3(texFragX * i, texFragY * (j * sub5 + 15), 0));
+            addVert(vec3(glm::rotate(mat4(1), angle, vec3(0, 1, 0)) * point),
+                    vec2(texFragX * i, texFragY * (j * sub5 + 15)),
+                    vec3(0, 0, 0));
         }
         // 下段+3
         for (int j = 0; j <= bSub; j++) {
             vec4 point = vec4(quadricBezier(vaseCurve6, 1.0f * j / bSub), 0, 0);
-            vertices.push_back(vec3(glm::rotate(mat4(1), angle, vec3(0, 1, 0)) * point));
-            vertices.push_back(vec3(texFragX * i, texFragY * (j * sub3 + 20), 0));
+            addVert(vec3(glm::rotate(mat4(1), angle, vec3(0, 1, 0)) * point),
+                    vec2(texFragX * i, texFragY * (j * sub3 + 20)),
+                    vec3(0, 0, 0));
         }
         // 底盘+2
-        vertices.push_back(vec3(0, 0.02f, 0));
-        vertices.push_back(vec3(texFragX * (i + 0.5f), 1, 0));
+        addVert(vec3(0, 0.02f, 0), vec2(texFragX * (i + 0.5f), 1), vec3(0, 0, 0));
     }
     int aSub = bSub * 6 + 3;
     for (int i = 0; i < rSub; i++) {

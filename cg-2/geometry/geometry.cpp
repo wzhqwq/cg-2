@@ -13,8 +13,13 @@ void Geometry::paint() {
     
     glVertexAttrib3fv(2, &currentColor[0]);
     glVertexAttribI1i(3, renderMode);
-    glDrawElements(renderType, (int) indices.size() * 3, GL_UNSIGNED_INT, 0);
-    
+    if (indices.size()) {
+        glDrawElements(renderType, (int) indices.size() * 3, GL_UNSIGNED_INT, 0);
+    }
+    else {
+        glDrawArrays(renderType, 0, (int) vertices.size() / 3);
+    }
+
     glBindVertexArray(0);
 }
 
@@ -39,12 +44,16 @@ void Geometry::updateBuffer() {
     glBufferData(GL_ARRAY_BUFFER, vertices.size() * sizeof(vec3), &vertices[0], GL_STREAM_DRAW);
     glEnableVertexAttribArray(0);
     glEnableVertexAttribArray(1);
-    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(GLfloat), (GLvoid *) 0);
-    glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, 6 * sizeof(GLfloat), (GLvoid *) (3 * sizeof(GLfloat)));
-    
-    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, indexBuffer);
-    glBufferData(GL_ELEMENT_ARRAY_BUFFER, indices.size() * sizeof(frag), &indices[0], GL_STATIC_DRAW);
-    
+    glEnableVertexAttribArray(4);
+    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 9 * sizeof(GLfloat), (GLvoid *) 0);
+    glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, 9 * sizeof(GLfloat), (GLvoid *) (3 * sizeof(GLfloat)));
+    glVertexAttribPointer(4, 3, GL_FLOAT, GL_FALSE, 9 * sizeof(GLfloat), (GLvoid *) (6 * sizeof(GLfloat)));
+
+    if (indices.size()) {
+        glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, indexBuffer);
+        glBufferData(GL_ELEMENT_ARRAY_BUFFER, indices.size() * sizeof(frag), &indices[0], GL_STATIC_DRAW);
+    }
+
     glBindVertexArray(0);
 }
 
@@ -55,6 +64,11 @@ void Geometry::addFrag(unsigned int a, unsigned int b, unsigned int c, unsigned 
     indices.push_back(frag(a, b, c));
     indices.push_back(frag(c, d, a));
 }
+void Geometry::addVert(const vec3 &vertPos, const vec2 &fragPos, const vec3 &normal) {
+    vertices.push_back(vertPos);
+    vertices.push_back(vec3(fragPos, 0));
+    vertices.push_back(normal);
+}
 void Geometry::reverse() {
     for (int i = 0; i < indices.size(); i++) {
         indices[i] = vec3(indices[i].z, indices[i].y, indices[i].x);
@@ -63,7 +77,7 @@ void Geometry::reverse() {
 }
 
 void Geometry::applyTransformation(mat4 matrix) {
-    for (int i = 0; i < vertices.size(); i += 2) {
+    for (int i = 0; i < vertices.size(); i += 3) {
         vertices[i] = vec3(matrix * vec4(vertices[i], 1.0f));
     }
     updateBuffer();
