@@ -10,6 +10,7 @@
 
 #include "common.h"
 #include "material.hpp"
+#include "shader.hpp"
 #include <vector>
 #include <cmath>
 
@@ -64,6 +65,7 @@ protected:
     vector<vec3> vertices;
     vector<frag> indices;
     GLenum renderType = GL_TRIANGLES;
+    mat4 modelMatrix = mat4(1);
 };
 
 class Group : public Object {

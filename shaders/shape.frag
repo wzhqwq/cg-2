@@ -4,6 +4,10 @@ in vec3 ambient;
 in vec3 diffuse;
 in vec3 specular;
 in float alpha;
+
+in vec3 n;
+in vec3 v;
+
 in vec2 TexCoord;
 flat in int mode;
 

@@ -12,9 +12,10 @@ mat4 Scene::getVPMatrix() {
     updateVPMatrix();
     return VP;
 }
+mat4 Scene::getProjectionMatrix() { return projection; }
 void Scene::updateVPMatrix() {
     VP = projection * view;
-    invVP = inverse(VP);
+//    invVP = inverse(VP);
 }
 
 int Scene::isChanged() { return changed; }

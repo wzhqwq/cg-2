@@ -16,7 +16,7 @@ using namespace std;
 
 struct Programs {
     GLuint shapeProgram;
-    GLuint fixedProgram;
+    GLuint shapeMVPLocation, shapeMVLocation;
 };
 
 GLuint loadProgram(string vert, string frag);

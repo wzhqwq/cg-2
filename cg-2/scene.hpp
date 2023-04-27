@@ -23,6 +23,7 @@ public:
     }
     
     mat4 getVPMatrix();
+    mat4 getProjectionMatrix();
     void moveTo(vec3 p);
     int isChanged();
     
@@ -49,6 +50,6 @@ private:
     int w, h;
 };
 
-extern Scene *mainScene, *fixedScene;
+extern Scene *mainScene;
 
 #endif /* scene_hpp */

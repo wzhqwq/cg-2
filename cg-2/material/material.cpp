@@ -22,11 +22,11 @@ void Material::useMaterial() {
         glDisable(GL_BLEND);
     }
     
-    glVertexAttrib3fv(2, &ambientColor[0]);
-    glVertexAttrib3fv(3, &diffuseColor[0]);
-    glVertexAttrib3fv(4, &specularColor[0]);
-    glVertexAttrib1f(5, opacity);
-    glVertexAttribI1i(6, mode);
+    glVertexAttrib3fv(3, &ambientColor[0]);
+    glVertexAttrib3fv(4, &diffuseColor[0]);
+    glVertexAttrib3fv(5, &specularColor[0]);
+    glVertexAttrib1f(6, opacity);
+    glVertexAttribI1i(7, mode);
 }
 
 void initMaterials() {

@@ -14,18 +14,13 @@
 
 using namespace glm;
 
-GLuint shapeMVPLocation;
 int altPressed = 0;
 float camDist = 10.0f, camAngle = pi<float>() * -0.1, camHeight = 5.0f;
-Scene *mainScene, *fixedScene;
+Scene *mainScene;
 
 void render() {
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
     
-    if (mainScene->isChanged()) {
-        glUseProgram(programs.shapeProgram);
-        glUniformMatrix4fv(shapeMVPLocation, 1, GL_FALSE, &mainScene->getVPMatrix()[0][0]);
-    }
     glUseProgram(programs.shapeProgram);
     mainScene->render(GL_RENDER);
     if (mainScene->selectionRect && mainScene->selectedItem) {
@@ -33,28 +28,15 @@ void render() {
     }
 }
 
-void loadShaders(char *shaderDir) {
-    if (shaderDir[strlen(shaderDir) - 1] == '/') {
-        shaderDir[strlen(shaderDir) - 1] = '\0';
-    }
-    initPrograms(shaderDir);
-    
-    shapeMVPLocation = glGetUniformLocation(programs.shapeProgram, "MVP");
-    
-    glUseProgram(programs.fixedProgram);
-    mat4 flippedMVP = scale(fixedScene->getVPMatrix(), vec3(1.0f, -1.0f, 1.0f));
-    glUniformMatrix4fv(shapeMVPLocation, 1, GL_FALSE, &flippedMVP[0][0]);
-}
-
-void mouseMoveCallback(GLFWwindow *window, double xpos, double ypos) {
-    int left = glfwGetMouseButton(window, GLFW_MOUSE_BUTTON_LEFT);
-    int right = glfwGetMouseButton(window, GLFW_MOUSE_BUTTON_RIGHT);
-}
-
-void mouseButtonCallback(GLFWwindow *window, int button, int action, int mods) {
-    double x, y;
-    glfwGetCursorPos(window, &x, &y);
-}
+//void mouseMoveCallback(GLFWwindow *window, double xpos, double ypos) {
+//    int left = glfwGetMouseButton(window, GLFW_MOUSE_BUTTON_LEFT);
+//    int right = glfwGetMouseButton(window, GLFW_MOUSE_BUTTON_RIGHT);
+//}
+//
+//void mouseButtonCallback(GLFWwindow *window, int button, int action, int mods) {
+//    double x, y;
+//    glfwGetCursorPos(window, &x, &y);
+//}
 
 void keyCallback(GLFWwindow *window, int key, int scancode, int action, int mods) {
     if (action == GLFW_RELEASE) {
@@ -108,15 +90,14 @@ int main(int argc, char * argv[]) {
 
     mainScene = new Scene(WIDTH, HEIGHT);
     mainScene->moveTo(vec3(camDist * sin(camAngle), camHeight, camDist * cos(camAngle)));
-    fixedScene = new Scene(WIDTH, HEIGHT);
-    loadShaders(argv[1]);
+    initPrograms(argv[1]);
     initTexture(argv[1]);
     initMaterials();
     
     buildRoom(argv[1]);
     
-    glfwSetCursorPosCallback(window, mouseMoveCallback);
-    glfwSetMouseButtonCallback(window, mouseButtonCallback);
+//    glfwSetCursorPosCallback(window, mouseMoveCallback);
+//    glfwSetMouseButtonCallback(window, mouseButtonCallback);
     glfwSetKeyCallback(window, keyCallback);
     glfwSetScrollCallback(window, scrollBallback);
 

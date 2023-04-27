@@ -6,11 +6,16 @@
 //
 
 #include "geometry.hpp"
+#include "scene.hpp"
 
 void Geometry::paint() {
     glBindVertexArray(VAO);
     material.useMaterial();
     
+    mat4 MVP = mainScene->getVPMatrix() * modelMatrix;
+    mat4 MV = mainScene->getProjectionMatrix() * modelMatrix;
+    glUniformMatrix4fv(programs.shapeMVPLocation, 1, GL_FALSE, &MVP[0][0]);
+    glUniformMatrix4fv(programs.shapeMVLocation, 1, GL_FALSE, &MV[0][0]);
     if (indices.size()) {
         glDrawElements(renderType, (int) indices.size() * 3, GL_UNSIGNED_INT, 0);
     }
@@ -42,10 +47,10 @@ void Geometry::updateBuffer() {
     glBufferData(GL_ARRAY_BUFFER, vertices.size() * sizeof(vec3), &vertices[0], GL_STREAM_DRAW);
     glEnableVertexAttribArray(0);
     glEnableVertexAttribArray(1);
-    glEnableVertexAttribArray(4);
+    glEnableVertexAttribArray(2);
     glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 9 * sizeof(GLfloat), (GLvoid *) 0);
     glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, 9 * sizeof(GLfloat), (GLvoid *) (3 * sizeof(GLfloat)));
-    glVertexAttribPointer(4, 3, GL_FLOAT, GL_FALSE, 9 * sizeof(GLfloat), (GLvoid *) (6 * sizeof(GLfloat)));
+    glVertexAttribPointer(2, 3, GL_FLOAT, GL_FALSE, 9 * sizeof(GLfloat), (GLvoid *) (6 * sizeof(GLfloat)));
 
     if (indices.size()) {
         glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, indexBuffer);
@@ -75,10 +80,7 @@ void Geometry::reverse() {
 }
 
 void Geometry::applyTransformation(mat4 matrix) {
-    for (int i = 0; i < vertices.size(); i += 3) {
-        vertices[i] = vec3(matrix * vec4(vertices[i], 1.0f));
-    }
-    updateBuffer();
+    modelMatrix = matrix * modelMatrix;
 }
 
 GLuint Geometry::getVAO() {

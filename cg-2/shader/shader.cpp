@@ -29,5 +29,6 @@ GLuint loadProgram(string vert, string frag) {
 void initPrograms(string basePath) {
     basePath += "/shaders/";
     programs.shapeProgram = loadProgram(basePath + "shape.vert", basePath + "shape.frag");
-    programs.fixedProgram = loadProgram(basePath + "shape.vert", basePath + "shape.frag");
+    programs.shapeMVPLocation = glGetUniformLocation(programs.shapeProgram, "MVP");
+    programs.shapeMVLocation = glGetUniformLocation(programs.shapeProgram, "MV");
 }
