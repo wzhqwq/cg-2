@@ -10,16 +10,7 @@
 void Table::setup() {
     Cube *top = new Cube();
     Cylinder *leg1 = new Cylinder(8), *leg2 = new Cylinder(8), *leg3 = new Cylinder(8), *leg4 = new Cylinder(8);
-    top->texture = textures.wood;
-    top->renderMode = TexPure;
-    leg1->texture = textures.wood;
-    leg1->renderMode = TexPure;
-    leg2->texture = textures.wood;
-    leg2->renderMode = TexPure;
-    leg3->texture = textures.wood;
-    leg3->renderMode = TexPure;
-    leg4->texture = textures.wood;
-    leg4->renderMode = TexPure;
+    top->material = leg1->material = leg2->material = leg3->material = leg4->material = woodMaterial;
     
     top->scale(vec3(TABLE_TOP_W, TABLE_TOP_H, TABLE_TOP_W));
     leg1->scale(vec3(TABLE_LEG_W, TABLE_H, TABLE_LEG_W));
@@ -43,16 +34,7 @@ void Table::setup() {
 void Chair::setup() {
     Cube *top = new Cube();
     Cylinder *leg1 = new Cylinder(8), *leg2 = new Cylinder(8), *leg3 = new Cylinder(8), *leg4 = new Cylinder(8);
-    top->texture = textures.wood;
-    top->renderMode = TexPure;
-    leg1->texture = textures.wood;
-    leg1->renderMode = TexPure;
-    leg2->texture = textures.wood;
-    leg2->renderMode = TexPure;
-    leg3->texture = textures.wood;
-    leg3->renderMode = TexPure;
-    leg4->texture = textures.wood;
-    leg4->renderMode = TexPure;
+    top->material = leg1->material = leg2->material = leg3->material = leg4->material = woodMaterial;
     
     top->scale(vec3(CHAIR_SIT_SURFACE_W, CHAIR_SIT_SURFACE_H, CHAIR_SIT_SURFACE_W));
     leg1->scale(vec3(CHAIR_LEG_W, CHAIR_H_1, CHAIR_LEG_W));
@@ -74,12 +56,7 @@ void Chair::setup() {
     
     Cube *back = new Cube();
     Cylinder *rod1 = new Cylinder(8), *rod2 = new Cylinder(8);
-    back->texture = textures.wood;
-    back->renderMode = TexPure;
-    rod1->texture = textures.wood;
-    rod1->renderMode = TexPure;
-    rod2->texture = textures.wood;
-    rod2->renderMode = TexPure;
+    back->material = rod1->material = rod2->material = woodMaterial;
 
     back->scale(vec3(CHAIR_BACK_W, CHAIR_BACK_H, CHAIR_SIT_SURFACE_H));
     rod1->scale(vec3(CHAIR_LEG_W, (CHAIR_H_2 - CHAIR_H_1), CHAIR_LEG_W));
@@ -107,26 +84,25 @@ void Globe::setup() {
     ball->scale(vec3(GLOBE_BALL_W));
     ball->rotate(GLOBE_BALL_R, vec3(0, 0, 1));
     ball->translate(vec3(0, GLOBE_BALL_H, 0));
-    ball->renderMode = TexPure;
-    ball->texture = textures.earth;
+    ball->material = earthMaterial;
     
     Cone *bottom = new Cone(15);
     bottom->scale(vec3(GLOBE_BOTTOM_W, GLOBE_BOTTOM_H, GLOBE_BOTTOM_W));
-    bottom->currentColor = vec3(0.2, 0.2, 0.2);
+    bottom->material = vec3(0.2, 0.2, 0.2);
     
     Ring *arc = new Ring(10, 15, 1.0f - (GLOBE_ARC_T * 2) / GLOBE_ARC_W, -90.0f, 90.0f);
     arc->scale(vec3(GLOBE_ARC_W));
     arc->rotate(pi<float>() / 2, vec3(1, 0, 0));
     arc->rotate(GLOBE_BALL_R, vec3(0, 0, 1));
     arc->translate(vec3(0, GLOBE_BALL_H, 0));
-    arc->currentColor = vec3(0.1, 0.1, 0.1);
+    arc->material = vec3(0.1, 0.1, 0.1);
 
     
     Cylinder *rod = new Cylinder(15);
     rod->scale(vec3(GLOBE_ROD_T, GLOBE_ARC_W, GLOBE_ROD_T));
     rod->rotate(GLOBE_BALL_R, vec3(0, 0, 1));
     rod->translate(vec3(0, GLOBE_BALL_H, 0));
-    rod->currentColor = vec3(0.1, 0.1, 0.1);
+    rod->material = vec3(0.1, 0.1, 0.1);
     
     addObject(ball);
     addObject(bottom);

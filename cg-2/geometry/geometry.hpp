@@ -9,6 +9,7 @@
 #define geometry_hpp
 
 #include "common.h"
+#include "material.hpp"
 #include <vector>
 #include <cmath>
 
@@ -16,9 +17,6 @@ using namespace std;
 
 enum DrawMode {
     Filled, Outlined, Translucent
-};
-enum RenderMode {
-    SingleColor, TexMask, TexPure, TexTest
 };
 
 class Object {
@@ -53,10 +51,7 @@ public:
     void reverse();
 
     GLuint getVAO();
-    
-    GLuint texture = 0;
-    vec3 currentColor;
-    RenderMode renderMode = SingleColor;
+    Material material;
 protected:
     void updateBuffer();
     // must in anticlockwise

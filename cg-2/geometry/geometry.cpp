@@ -8,11 +8,9 @@
 #include "geometry.hpp"
 
 void Geometry::paint() {
-    glBindTexture(GL_TEXTURE_2D, texture);
     glBindVertexArray(VAO);
+    material.useMaterial();
     
-    glVertexAttrib3fv(2, &currentColor[0]);
-    glVertexAttribI1i(3, renderMode);
     if (indices.size()) {
         glDrawElements(renderType, (int) indices.size() * 3, GL_UNSIGNED_INT, 0);
     }

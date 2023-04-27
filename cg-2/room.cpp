@@ -11,8 +11,7 @@ void buildRoom(string baseUrl) {
     Cube *room = new Cube();
     room->scale(vec3(10));
     room->translate(vec3(0, 5, 0));
-    room->renderMode = TexPure;
-    room->texture = textures.cubeTest;
+    room->material.texture = textures.cubeTest;
     room->reverse();
     mainScene->objects.push_back(room);
     
@@ -30,11 +29,10 @@ void buildRoom(string baseUrl) {
     Vase *vase = new Vase(15, 6);
     vase->scale(vec3(0.8f));
     vase->translate(vec3(-0.6f, table->sy, 0));
-    vase->renderMode = TexPure;
-    vase->texture = textures.marble;
+    vase->material = vaseMaterial;
     mainScene->objects.push_back(vase);
     
     OutterObject *slime = new OutterObject(baseUrl + "/object/Slime.obj");
-    slime->renderMode = TexTest;
+    slime->material.mode = TexTest;
     mainScene->objects.push_back(slime);
 }

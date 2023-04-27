@@ -19,8 +19,7 @@ public:
         renderType = GL_TRIANGLES;
         vertices.resize(108);
         updateBox(start, end);
-        texture = textures.selection;
-        renderMode = TexPure;
+        material.texture = textures.selection;
     }
     void updateBox(vec3 bl, vec3 tr);
     void updateScale(float scale);

@@ -10,6 +10,7 @@
 #include "scene.hpp"
 #include "texture.hpp"
 #include "room.hpp"
+#include "material.hpp"
 
 using namespace glm;
 
@@ -110,6 +111,7 @@ int main(int argc, char * argv[]) {
     fixedScene = new Scene(WIDTH, HEIGHT);
     loadShaders(argv[1]);
     initTexture(argv[1]);
+    initMaterials();
     
     buildRoom(argv[1]);
     
