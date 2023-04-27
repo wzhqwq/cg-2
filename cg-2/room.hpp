@@ -12,7 +12,11 @@
 #include "basic.hpp"
 #include "assembled.hpp"
 #include "scene.hpp"
+#include "outterObject.hpp"
+#include <string>
 
-void buildRoom();
+using namespace std;
+
+void buildRoom(string baseUrl);
 
 #endif /* room_hpp */

@@ -18,6 +18,7 @@ class OutterObject : public Geometry {
 public:
     OutterObject(string path) {
         loadFromObj(path.c_str());
+        updateBuffer();
     }
 private:
     void loadFromObj(const char *path);

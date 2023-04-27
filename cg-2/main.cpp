@@ -111,7 +111,7 @@ int main(int argc, char * argv[]) {
     loadShaders(argv[1]);
     initTexture(argv[1]);
     
-    buildRoom();
+    buildRoom(argv[1]);
     
     glfwSetCursorPosCallback(window, mouseMoveCallback);
     glfwSetMouseButtonCallback(window, mouseButtonCallback);

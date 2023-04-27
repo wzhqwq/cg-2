@@ -18,7 +18,7 @@ enum DrawMode {
     Filled, Outlined, Translucent
 };
 enum RenderMode {
-    SingleColor, TexMask, TexPure
+    SingleColor, TexMask, TexPure, TexTest
 };
 
 class Object {

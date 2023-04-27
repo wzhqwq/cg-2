@@ -7,7 +7,7 @@
 
 #include "room.hpp"
 
-void buildRoom() {
+void buildRoom(string baseUrl) {
     Cube *room = new Cube();
     room->scale(vec3(10));
     room->translate(vec3(0, 5, 0));
@@ -33,4 +33,8 @@ void buildRoom() {
     vase->renderMode = TexPure;
     vase->texture = textures.marble;
     mainScene->objects.push_back(vase);
+    
+    OutterObject *slime = new OutterObject(baseUrl + "/object/Slime.obj");
+    slime->renderMode = TexTest;
+    mainScene->objects.push_back(slime);
 }
