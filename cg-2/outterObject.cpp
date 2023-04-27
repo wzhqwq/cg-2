@@ -9,16 +9,13 @@
 
 void OutterObject::loadFromObj(const char *path) {
     FILE * file = fopen(path, "r");
-    if(file == NULL) {
+    if (file == NULL) {
         printf("Impossible to open the file !\n");
         return;
     }
     
-    vector<frag> vertexIndices, uvIndices, normalIndices;
-    vector<vec3> temp_vertices;
-    vector<vec2> temp_uvs;
-    vector<vec3> temp_normals;
-    while(1){
+    Part *currentPart = NULL;
+    while (1) {
         char lineHeader[128];
         // read the first word of the line
         int res = fscanf(file, "%s", lineHeader);
@@ -27,22 +24,21 @@ void OutterObject::loadFromObj(const char *path) {
         
         // else : parse lineHeader
         if (strcmp(lineHeader, "v") == 0) {
-            glm::vec3 vertex;
+            vec3 vertex;
             fscanf(file, "%f %f %f\n", &vertex.x, &vertex.y, &vertex.z);
             temp_vertices.push_back(vertex);
         }
         else if (strcmp(lineHeader, "vt") == 0) {
-            glm::vec2 uv;
+            vec2 uv;
             fscanf(file, "%f %f\n", &uv.x, &uv.y);
             temp_uvs.push_back(uv);
         }
         else if (strcmp(lineHeader, "vn") == 0) {
-            glm::vec3 normal;
+            vec3 normal;
             fscanf(file, "%f %f %f\n", &normal.x, &normal.y, &normal.z);
             temp_normals.push_back(normal);
         }
         else if (strcmp(lineHeader, "f") == 0) {
-            std::string vertex1, vertex2, vertex3;
             frag vertexIndex, uvIndex, normalIndex;
             int matches = fscanf(file, "%d/%d/%d %d/%d/%d %d/%d/%d",
                                  &vertexIndex[0], &uvIndex[0], &normalIndex[0],
@@ -52,24 +48,98 @@ void OutterObject::loadFromObj(const char *path) {
                 printf("Wrong fragment format\n");
                 return;
             }
-            vertexIndices.push_back(vertexIndex);
-            uvIndices.push_back(uvIndex);
-            normalIndices.push_back(normalIndex);
+            for (unsigned int i = 0; i < 3; i++) {
+                currentPart->addVert(temp_vertices[vertexIndex[i] - 1],
+                                     temp_uvs[uvIndex[i] - 1],
+                                     temp_normals[normalIndex[i] - 1]);
+            }
             // 4-edge face
             matches = fscanf(file, "%d/%d/%d\n",
                              &vertexIndex[1], &uvIndex[1], &normalIndex[1]);
             if (matches == 3) {
-                vertexIndices.push_back(vec3(vertexIndex.z, vertexIndex.y, vertexIndex.x));
-                uvIndices.push_back(vec3(uvIndex.z, uvIndex.y, uvIndex.x));
-                normalIndices.push_back(vec3(normalIndex.z, normalIndex.y, normalIndex.x));
+                for (int i = 2; i >= 0; i--) {
+                    currentPart->addVert(temp_vertices[vertexIndex[i] - 1],
+                                         temp_uvs[uvIndex[i] - 1],
+                                         temp_normals[normalIndex[i] - 1]);
+                }
+            }
+        }
+        else if (strcmp(lineHeader, "mtllib") == 0) {
+            char mtlName[100], mtlPath[100];
+            fscanf(file, "%s", mtlName);
+            strcpy(mtlPath, path);
+            long pos = strrchr(path, '/') - path;
+            snprintf(mtlPath + pos, 100, "/%s", mtlName);
+            loadFromMtl(mtlPath);
+        }
+        else if (strcmp(lineHeader, "usemtl") == 0) {
+            char materialNameC[100];
+            fscanf(file, "%s", materialNameC);
+            string materialName = materialNameC;
+            
+            if (currentPart) currentPart->updateBuffer();
+            currentPart = new Part();
+            currentPart->material = materials[materialName];
+            addObject(currentPart);
+        }
+    }
+    if (currentPart) currentPart->updateBuffer();
+    
+    fclose(file);
+}
+
+void OutterObject::loadFromMtl(const char *path) {
+    FILE * file = fopen(path, "r");
+    if (file == NULL) {
+        printf("Impossible to open the file !\n");
+        return;
+    }
+    Material materialNow;
+    string materialName = "";
+    while (1) {
+        char lineHeader[128];
+        // read the first word of the line
+        int res = fscanf(file, "%s", lineHeader);
+        if (res == EOF)
+            break;
+        
+        if (strcmp(lineHeader, "newmtl") == 0) {
+            if (materialName != "") {
+                materials[materialName] = materialNow;
+                materialNow = Material();
+            }
+            materialNow.mode = SingleColor;
+            char materialNameC[100];
+            fscanf(file, "%s", materialNameC);
+            materialName = materialNameC;
+        }
+        else if (strcmp(lineHeader, "Ka") == 0) {
+            vec3 color;
+            fscanf(file, "%f %f %f\n", &color.r, &color.g, &color.b);
+            materialNow.ambientColor = color;
+        }
+        else if (strcmp(lineHeader, "Kd") == 0) {
+            vec3 color;
+            fscanf(file, "%f %f %f\n", &color.r, &color.g, &color.b);
+            materialNow.diffuseColor = color;
+        }
+        else if (strcmp(lineHeader, "Ks") == 0) {
+            vec3 color;
+            fscanf(file, "%f %f %f\n", &color.r, &color.g, &color.b);
+            materialNow.specularColor = color;
+        }
+        else if (strcmp(lineHeader, "d") == 0) {
+            float opacity;
+            fscanf(file, "%f\n", &opacity);
+            materialNow.opacity = opacity;
+            if (1.0f - opacity > 1e-3f) {
+                materialNow.translucent = 1;
             }
         }
     }
-    for(unsigned int i = 0; i < vertexIndices.size(); i++) {
-        for (unsigned int j = 0; j < 3; j++) {
-            addVert(temp_vertices[vertexIndices[i][j] - 1],
-                    temp_uvs[uvIndices[i][j] - 1],
-                    temp_normals[normalIndices[i][j] - 1]);
-        }
+    if (materialName != "") {
+        materials[materialName] = materialNow;
     }
+    
+    fclose(file);
 }

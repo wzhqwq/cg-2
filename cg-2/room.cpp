@@ -33,6 +33,5 @@ void buildRoom(string baseUrl) {
     mainScene->objects.push_back(vase);
     
     OutterObject *slime = new OutterObject(baseUrl + "/object/Slime.obj");
-    slime->material.mode = TexTest;
     mainScene->objects.push_back(slime);
 }
