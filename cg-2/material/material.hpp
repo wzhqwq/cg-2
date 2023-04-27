@@ -18,10 +18,14 @@ enum RenderMode {
 class Material {
 public:
     Material() : mode(TexPure) {}
-    Material(vec3 currentColor) : color(currentColor), mode(SingleColor) {}
+    Material(vec3 color) : diffuseColor(color), mode(SingleColor) {}
     
     GLuint texture;
-    vec3 color;
+    vec3 ambientColor = vec3(1, 1, 1);
+    vec3 diffuseColor;
+    vec3 specularColor = vec3(1, 1, 1);
+    float opacity = 1.0f;
+    int translucent = 0;
     RenderMode mode;
     
     void useMaterial();

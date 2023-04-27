@@ -1,6 +1,9 @@
 #version 330 core
 
-in vec3 ourColor; //output color from vertexshader
+in vec3 ambient;
+in vec3 diffuse;
+in vec3 specular;
+in float alpha;
 in vec2 TexCoord;
 flat in int mode;
 
@@ -10,19 +13,22 @@ uniform sampler2D ourTexture;
 
 void main() {
     vec4 textureColor = texture(ourTexture, TexCoord);
+    vec4 finalDiffuse = vec4(0.0, 0.0, 0.0, 1.0);
     if (mode == 0) {
-        color = vec4(ourColor, 1.0);
+        finalDiffuse = vec4(diffuse, 1.0);
     }
     else if (mode == 1) {
-        color = vec4(textureColor.a * ourColor + (1 - textureColor.a) * vec3(1.0, 1.0, 1.0), 1.0);
+        // texture mask mode
+        finalDiffuse = vec4(textureColor.a * diffuse + (1 - textureColor.a) * vec3(1.0, 1.0, 1.0), 1.0);
     }
     else if (mode == 2) {
-        color = textureColor;
+        // texture
+        finalDiffuse = textureColor;
     }
     else if (mode == 3) {
-        color = vec4(TexCoord, 0.0, 1.0);
+        // texture coordination test
+        finalDiffuse = vec4(TexCoord, 0.0, 1.0);
     }
-    else {
-        color = vec4(0.0, 0.0, 0.0, 1.0);
-    }
+    finalDiffuse.a = finalDiffuse.a * alpha;
+    color = finalDiffuse;
 }
