@@ -7,7 +7,7 @@
 
 #include "shader.hpp"
 
-Programs programs;
+ShapeShader *shapeShader;
 
 GLuint loadProgram(string vert, string frag) {
     GLuint program = glCreateProgram();
@@ -28,7 +28,16 @@ GLuint loadProgram(string vert, string frag) {
 
 void initPrograms(string basePath) {
     basePath += "/shaders/";
-    programs.shapeProgram = loadProgram(basePath + "shape.vert", basePath + "shape.frag");
-    programs.shapeMVPLocation = glGetUniformLocation(programs.shapeProgram, "MVP");
-    programs.shapeMVLocation = glGetUniformLocation(programs.shapeProgram, "MV");
+    shapeShader = new ShapeShader(basePath);
+}
+
+ShapeShader::ShapeShader(string basePath) {
+    program = loadProgram(basePath + "shape.vert", basePath + "shape.frag");
+    mvpLoc = glGetUniformLocation(program, "MVP");
+    mvLoc = glGetUniformLocation(program, "MV");
+    modeLoc = glGetUniformLocation(program, "mode");
+    ambientLoc = glGetUniformLocation(program, "ambient");
+    diffuseLoc = glGetUniformLocation(program, "diffuse");
+    specularLoc = glGetUniformLocation(program, "specular");
+    opacityLoc = glGetUniformLocation(program, "opacity");
 }

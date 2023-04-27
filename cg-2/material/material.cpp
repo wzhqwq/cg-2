@@ -6,6 +6,7 @@
 //
 
 #include "material.hpp"
+#include "shader.hpp"
 
 Material woodMaterial;
 Material earthMaterial;
@@ -22,11 +23,11 @@ void Material::useMaterial() {
         glDisable(GL_BLEND);
     }
     
-    glVertexAttrib3fv(3, &ambientColor[0]);
-    glVertexAttrib3fv(4, &diffuseColor[0]);
-    glVertexAttrib3fv(5, &specularColor[0]);
-    glVertexAttrib1f(6, opacity);
-    glVertexAttribI1i(7, mode);
+    glUniform3fv(shapeShader->ambientLoc, 1, &ambientColor[0]);
+    glUniform3fv(shapeShader->diffuseLoc, 1, &diffuseColor[0]);
+    glUniform3fv(shapeShader->specularLoc, 1, &specularColor[0]);
+    glUniform1f(shapeShader->opacityLoc, opacity);
+    glUniform1i(shapeShader->modeLoc, mode);
 }
 
 void initMaterials() {

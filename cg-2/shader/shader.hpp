@@ -14,14 +14,18 @@
 
 using namespace std;
 
-struct Programs {
-    GLuint shapeProgram;
-    GLuint shapeMVPLocation, shapeMVLocation;
+class ShapeShader {
+public:
+    ShapeShader(string basePath);
+    
+    GLuint program;
+    GLuint mvpLoc, mvLoc, modeLoc;
+    GLuint ambientLoc, diffuseLoc, specularLoc, opacityLoc;
 };
 
 GLuint loadProgram(string vert, string frag);
 void initPrograms(string basePath);
 
-extern Programs programs;
+extern ShapeShader *shapeShader;
 
 #endif /* shader_hpp */

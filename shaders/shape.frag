@@ -1,19 +1,19 @@
 #version 330 core
 
-in vec3 ambient;
-in vec3 diffuse;
-in vec3 specular;
-in float alpha;
-
 in vec3 n;
 in vec3 v;
 
 in vec2 TexCoord;
-flat in int mode;
 
-out vec4 color;
+uniform vec3 ambient;
+uniform vec3 diffuse;
+uniform vec3 specular;
+uniform float opacity;
+uniform int mode;
 
 uniform sampler2D ourTexture;
+
+out vec4 color;
 
 void main() {
     vec4 textureColor = texture(ourTexture, TexCoord);
@@ -33,6 +33,6 @@ void main() {
         // texture coordination test
         finalDiffuse = vec4(TexCoord, 0.0, 1.0);
     }
-    finalDiffuse.a = finalDiffuse.a * alpha;
+    finalDiffuse.a = finalDiffuse.a * opacity;
     color = finalDiffuse;
 }

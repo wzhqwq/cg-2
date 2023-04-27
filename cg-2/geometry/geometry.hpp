@@ -10,7 +10,6 @@
 
 #include "common.h"
 #include "material.hpp"
-#include "shader.hpp"
 #include <vector>
 #include <cmath>
 

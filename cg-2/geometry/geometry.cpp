@@ -7,6 +7,7 @@
 
 #include "geometry.hpp"
 #include "scene.hpp"
+#include "shader.hpp"
 
 void Geometry::paint() {
     glBindVertexArray(VAO);
@@ -14,8 +15,8 @@ void Geometry::paint() {
     
     mat4 MVP = mainScene->getVPMatrix() * modelMatrix;
     mat4 MV = mainScene->getProjectionMatrix() * modelMatrix;
-    glUniformMatrix4fv(programs.shapeMVPLocation, 1, GL_FALSE, &MVP[0][0]);
-    glUniformMatrix4fv(programs.shapeMVLocation, 1, GL_FALSE, &MV[0][0]);
+    glUniformMatrix4fv(shapeShader->mvpLoc, 1, GL_FALSE, &MVP[0][0]);
+    glUniformMatrix4fv(shapeShader->mvLoc, 1, GL_FALSE, &MV[0][0]);
     if (indices.size()) {
         glDrawElements(renderType, (int) indices.size() * 3, GL_UNSIGNED_INT, 0);
     }

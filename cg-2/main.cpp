@@ -21,7 +21,7 @@ Scene *mainScene;
 void render() {
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
     
-    glUseProgram(programs.shapeProgram);
+    glUseProgram(shapeShader->program);
     mainScene->render(GL_RENDER);
     if (mainScene->selectionRect && mainScene->selectedItem) {
         mainScene->selectionRect->drawSelf();
