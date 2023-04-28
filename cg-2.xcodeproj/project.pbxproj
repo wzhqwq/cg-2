@@ -22,7 +22,6 @@
 		607F51DA29F43FD400456824 /* room.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 607F51D829F43FD400456824 /* room.cpp */; };
 		607F51DC29F4421300456824 /* libglfw.3.3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 607F51DB29F4421300456824 /* libglfw.3.3.dylib */; };
 		607F51E029F4422D00456824 /* libGLEW.2.2.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 607F51DF29F4422D00456824 /* libGLEW.2.2.0.dylib */; };
-		607F51E829F7A74700456824 /* bezier.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 607F51E629F7A74700456824 /* bezier.cpp */; };
 		607F51EF29F8A65D00456824 /* outterObject.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 607F51ED29F8A65D00456824 /* outterObject.cpp */; };
 		60E3DF3629FA17DE00562C7C /* material.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 60E3DF3429FA17DE00562C7C /* material.cpp */; };
 /* End PBXBuildFile section */
@@ -78,7 +77,6 @@
 		607F51E329F58C4700456824 /* wood.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = wood.jpg; sourceTree = "<group>"; };
 		607F51E429F62B4C00456824 /* earth.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = earth.jpg; sourceTree = "<group>"; };
 		607F51E529F77BC500456824 /* chessboard.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = chessboard.jpg; sourceTree = "<group>"; };
-		607F51E629F7A74700456824 /* bezier.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = bezier.cpp; sourceTree = "<group>"; };
 		607F51E729F7A74700456824 /* bezier.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = bezier.hpp; sourceTree = "<group>"; };
 		607F51E929F7D5C900456824 /* marble.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = marble.jpg; sourceTree = "<group>"; };
 		607F51EB29F8A58500456824 /* Slime.obj */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Slime.obj; sourceTree = "<group>"; };
@@ -158,7 +156,6 @@
 				607F519F29ED622B00456824 /* stb_image.h */,
 				607F51CF29F1538800456824 /* geoControl.cpp */,
 				607F51D029F1538800456824 /* geoControl.hpp */,
-				607F51E629F7A74700456824 /* bezier.cpp */,
 				607F51E729F7A74700456824 /* bezier.hpp */,
 			);
 			path = tools;
@@ -307,7 +304,6 @@
 				607F51B729ED622C00456824 /* texture.cpp in Sources */,
 				607F51B929ED622C00456824 /* shaderReader.cpp in Sources */,
 				607F518C29ED60D700456824 /* main.cpp in Sources */,
-				607F51E829F7A74700456824 /* bezier.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

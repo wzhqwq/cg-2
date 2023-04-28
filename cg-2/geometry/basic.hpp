@@ -14,7 +14,7 @@
 
 class Cube : public Geometry {
 public:
-    Cube() : Geometry() {
+    Cube() {
         setup();
         updateBuffer();
     }
@@ -24,39 +24,41 @@ private:
 
 class Sphere : public Geometry {
 public:
-    Sphere(int rotateSubdivision, int axisSubdivision) : Geometry() {
-        setup(rotateSubdivision, axisSubdivision);
+    Sphere(int slices, int stacks) {
+        setup(slices, stacks);
         updateBuffer();
     }
 private:
-    void setup(int rSub, int aSub);
+    void setup(int slices, int stacks);
 };
 
 class Cylinder : public Geometry {
 public:
-    Cylinder(int subdivision) : Geometry() {
-        setup(subdivision);
+    Cylinder(int slices) : Cylinder(slices, 1) {}
+    Cylinder(int slices, int stacks) {
+        setup(slices, stacks);
         updateBuffer();
     }
 private:
-    void setup(int sub);
+    void setup(int slices, int stacks);
 };
 
 class Cone : public Geometry {
 public:
-    Cone(int subdivision) : Geometry() {
-        setup(subdivision);
+    Cone(int slices) : Cone(slices, 1) {}
+    Cone(int slices, int stacks) {
+        setup(slices, stacks);
         updateBuffer();
     }
 private:
-    void setup(int sub);
+    void setup(int slices, int stacks);
 };
 
 class Ring : public Geometry {
 public:
-    Ring(int circleSubdivision, int arcSubdivision, float inset) : Ring(circleSubdivision, arcSubdivision, inset, 0, 360) {};
-    Ring(int circleSubdivision, int arcSubdivision, float inset, float startAngle, float endAngle) {
-        setup(circleSubdivision, arcSubdivision, inset, startAngle * pi<float>() / 180, endAngle * pi<float>() / 180);
+    Ring(int slices, int stacks, float inset) : Ring(slices, stacks, inset, 0, 360) {}
+    Ring(int slices, int stacks, float inset, float startAngle, float endAngle) {
+        setup(slices, stacks, inset, startAngle * pi<float>() / 180, endAngle * pi<float>() / 180);
         updateBuffer();
     }
 private:
@@ -65,12 +67,12 @@ private:
 
 class Vase : public Geometry {
 public:
-    Vase(int rotateSubdivision, int bezierSubdivision) : Geometry() {
-        setup(rotateSubdivision, bezierSubdivision);
+    Vase(int slices, int stacks) {
+        setup(slices, stacks);
         updateBuffer();
     }
 private:
-    void setup(int rSub, int bSub);
+    void setup(int slices, int stacks);
 };
 
 #endif /* basic_hpp */

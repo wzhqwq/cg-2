@@ -9,7 +9,8 @@
 
 void Table::setup() {
     Cube *top = new Cube();
-    Cylinder *leg1 = new Cylinder(8), *leg2 = new Cylinder(8), *leg3 = new Cylinder(8), *leg4 = new Cylinder(8);
+    Cylinder *leg1 = new Cylinder(8, 8), *leg2 = new Cylinder(8, 8);
+    Cylinder *leg3 = new Cylinder(8, 8), *leg4 = new Cylinder(8, 8);
     top->material = leg1->material = leg2->material = leg3->material = leg4->material = woodMaterial;
     
     top->scale(vec3(TABLE_TOP_W, TABLE_TOP_H, TABLE_TOP_W));
@@ -33,7 +34,8 @@ void Table::setup() {
 
 void Chair::setup() {
     Cube *top = new Cube();
-    Cylinder *leg1 = new Cylinder(8), *leg2 = new Cylinder(8), *leg3 = new Cylinder(8), *leg4 = new Cylinder(8);
+    Cylinder *leg1 = new Cylinder(8, 4), *leg2 = new Cylinder(8, 4);
+    Cylinder *leg3 = new Cylinder(8, 4), *leg4 = new Cylinder(8, 4);
     top->material = leg1->material = leg2->material = leg3->material = leg4->material = woodMaterial;
     
     top->scale(vec3(CHAIR_SIT_SURFACE_W, CHAIR_SIT_SURFACE_H, CHAIR_SIT_SURFACE_W));
