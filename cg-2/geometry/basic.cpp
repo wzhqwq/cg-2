@@ -108,7 +108,7 @@ void Cone::setup(int slices, int stacks) {
     for (int i = 0; i <= slices; i++) {
         float longitude = 2 * Pi * i / slices;
         float x = 0.5f * sin(longitude), z = 0.5f * cos(longitude);
-        vec3 sideNormal = vec3(x, 0.5f, z);
+        vec3 sideNormal = normalize(vec3(sin(longitude), 1, cos(longitude)));
         
         for (int j = 0; j <= stacks; j++)
             addVert(vec3(x * j / stacks, (float)(stacks - j) / stacks, z * j / stacks),
@@ -245,6 +245,7 @@ void Vase::setup(int rSub, int bSub) {
                     vec3(rMat * normal));
         }
         // 边缘+1
+        addVert(vec3(rMat * vec4(0.2f, 1, 0, 0)), vec2(texFragX * i, texFragY * 12), vec3(0, 1, 0));
         // 内部
         // 上段+2
         for (int j = 0; j < bSub; j++) {
@@ -273,7 +274,7 @@ void Vase::setup(int rSub, int bSub) {
         // 底盘+2
         addVert(vec3(0, 0.02f, 0), vec2(texFragX * (i + 0.5f), 1), vec3(0, 1, 0));
     }
-    int aSub = bSub * 6 + 3;
+    int aSub = bSub * 6 + 4;
     for (int i = 0; i < rSub; i++) {
         int offset = (aSub + 1) * i;
         int nextOffset = offset + (aSub + 1);

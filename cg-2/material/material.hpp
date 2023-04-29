@@ -23,8 +23,10 @@ public:
     GLuint texture;
     vec3 ambientColor = vec3(1, 1, 1);
     vec3 diffuseColor;
-    vec3 specularColor = vec3(1, 1, 1);
+    vec3 specularColor = vec3(0.5f, 0.5f, 0.5f);
     float opacity = 1.0f;
+    float shininess = 50.0f;
+    float smoothness = 1.0f;
     int translucent = 0;
     RenderMode mode;
     

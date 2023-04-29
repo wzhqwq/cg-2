@@ -13,10 +13,7 @@ void Geometry::paint() {
     glBindVertexArray(VAO);
     material.useMaterial();
     
-    mat4 MVP = mainScene->getVPMatrix() * modelMatrix;
-    mat4 MV = mainScene->getProjectionMatrix() * modelMatrix;
-    glUniformMatrix4fv(shapeShader->mvpLoc, 1, GL_FALSE, &MVP[0][0]);
-    glUniformMatrix4fv(shapeShader->mvLoc, 1, GL_FALSE, &MV[0][0]);
+    glUniformMatrix4fv(shapeShader->modelLoc, 1, GL_FALSE, &modelMatrix[0][0]);
     if (indices.size()) {
         glDrawElements(renderType, (int) indices.size() * 3, GL_UNSIGNED_INT, 0);
     }
@@ -76,6 +73,9 @@ void Geometry::addVert(const vec3 &vertPos, const vec2 &fragPos, const vec3 &nor
 void Geometry::reverse() {
     for (int i = 0; i < indices.size(); i++) {
         indices[i] = vec3(indices[i].z, indices[i].y, indices[i].x);
+    }
+    for (int i = 0; i < vertices.size(); i += 3) {
+        vertices[i + 2] = -vertices[i + 2];
     }
     updateBuffer();
 }

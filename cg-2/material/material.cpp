@@ -26,12 +26,14 @@ void Material::useMaterial() {
     glUniform3fv(shapeShader->ambientLoc, 1, &ambientColor[0]);
     glUniform3fv(shapeShader->diffuseLoc, 1, &diffuseColor[0]);
     glUniform3fv(shapeShader->specularLoc, 1, &specularColor[0]);
-    glUniform1f(shapeShader->opacityLoc, opacity);
+    glUniform3f(shapeShader->materialCoefficientsLoc, opacity, shininess, smoothness);
     glUniform1i(shapeShader->modeLoc, mode);
 }
 
 void initMaterials() {
     woodMaterial.texture = textures.wood;
+    woodMaterial.smoothness = 0.5f;
     earthMaterial.texture = textures.earth;
     vaseMaterial.texture = textures.marble;
+    vaseMaterial.shininess = 200.0f;
 }

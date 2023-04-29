@@ -22,7 +22,7 @@ void render() {
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
     
     glUseProgram(shapeShader->program);
-    mainScene->render(GL_RENDER);
+    mainScene->render();
     if (mainScene->selectionRect && mainScene->selectedItem) {
         mainScene->selectionRect->drawSelf();
     }
@@ -88,12 +88,13 @@ int main(int argc, char * argv[]) {
     glEnable(GL_CULL_FACE);
     glEnable(GL_DEPTH_TEST);
 
-    mainScene = new Scene(WIDTH, HEIGHT);
-    mainScene->moveTo(vec3(camDist * sin(camAngle), camHeight, camDist * cos(camAngle)));
     initPrograms(argv[1]);
     initTexture(argv[1]);
     initMaterials();
     
+    mainScene = new Scene(WIDTH, HEIGHT);
+    mainScene->moveTo(vec3(camDist * sin(camAngle), camHeight, camDist * cos(camAngle)));
+
     buildRoom(argv[1]);
     
 //    glfwSetCursorPosCallback(window, mouseMoveCallback);

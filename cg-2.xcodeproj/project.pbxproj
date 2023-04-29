@@ -24,6 +24,7 @@
 		607F51E029F4422D00456824 /* libGLEW.2.2.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 607F51DF29F4422D00456824 /* libGLEW.2.2.0.dylib */; };
 		607F51EF29F8A65D00456824 /* outterObject.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 607F51ED29F8A65D00456824 /* outterObject.cpp */; };
 		60E3DF3629FA17DE00562C7C /* material.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 60E3DF3429FA17DE00562C7C /* material.cpp */; };
+		60E3DF3929FB6CFE00562C7C /* light.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 60E3DF3729FB6CFE00562C7C /* light.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -85,6 +86,8 @@
 		607F51EE29F8A65D00456824 /* outterObject.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = outterObject.hpp; sourceTree = "<group>"; };
 		60E3DF3429FA17DE00562C7C /* material.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = material.cpp; sourceTree = "<group>"; };
 		60E3DF3529FA17DE00562C7C /* material.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = material.hpp; sourceTree = "<group>"; };
+		60E3DF3729FB6CFE00562C7C /* light.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = light.cpp; sourceTree = "<group>"; };
+		60E3DF3829FB6CFE00562C7C /* light.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = light.hpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -128,6 +131,8 @@
 				60E3DF3229FA177900562C7C /* material */,
 				607F519A29ED622B00456824 /* tools */,
 				607F51AA29ED622B00456824 /* geometry */,
+				60E3DF3729FB6CFE00562C7C /* light.cpp */,
+				60E3DF3829FB6CFE00562C7C /* light.hpp */,
 				607F519729ED622B00456824 /* scene.cpp */,
 				607F519829ED622B00456824 /* scene.hpp */,
 				607F51D829F43FD400456824 /* room.cpp */,
@@ -298,6 +303,7 @@
 				607F51BA29ED622C00456824 /* geometry.cpp in Sources */,
 				607F51D429F4369500456824 /* basic.cpp in Sources */,
 				607F51B529ED622C00456824 /* stb_image.cpp in Sources */,
+				60E3DF3929FB6CFE00562C7C /* light.cpp in Sources */,
 				607F51BC29ED622C00456824 /* selection.cpp in Sources */,
 				60E3DF3629FA17DE00562C7C /* material.cpp in Sources */,
 				607F51D729F43A7F00456824 /* assembled.cpp in Sources */,

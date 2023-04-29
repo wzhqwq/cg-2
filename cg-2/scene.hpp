@@ -11,6 +11,7 @@
 #include "common.h"
 #include "geometry.hpp"
 #include "selection.hpp"
+#include "shader.hpp"
 
 #include <vector>
 
@@ -20,16 +21,14 @@ public:
         glViewport(0, 0, _w, _h);
         projection = perspective(45.0f, (float) w / h, 0.1f, 1000.0f);
         view = lookAt(currentPos, vec3(0, currentPos.y, 0), vec3(0, 1, 0));
+        glUseProgram(shapeShader->program);
+        glUniformMatrix4fv(shapeShader->projectionLoc, 1, GL_FALSE, &projection[0][0]);
+        glUniformMatrix4fv(shapeShader->viewLoc, 1, GL_FALSE, &view[0][0]);
     }
     
-    mat4 getVPMatrix();
-    mat4 getProjectionMatrix();
     void moveTo(vec3 p);
-    int isChanged();
     
-    vec3 toWorldPos(float x, float y);
-    void render(GLenum renderMode);
-    Geometry *rayCast(float x, float y);
+    void render();
     
     vector<Object*> objects;
     vec3 currentColor = vec3(1.0f, 0.0f, 0.0f);
@@ -41,12 +40,9 @@ private:
     
     mat4 projection;
     mat4 view;
-    mat4 VP;
-    mat4 invVP;
     
     vec3 currentPos = vec3(100, 10, 0);
     
-    int changed = 1;
     int w, h;
 };
 

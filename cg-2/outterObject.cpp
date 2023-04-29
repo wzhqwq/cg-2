@@ -136,6 +136,11 @@ void OutterObject::loadFromMtl(const char *path) {
                 materialNow.translucent = 1;
             }
         }
+        else if (strcmp(lineHeader, "Ns") == 0) {
+            float shininess;
+            fscanf(file, "%f\n", &shininess);
+            materialNow.shininess = shininess;
+        }
     }
     if (materialName != "") {
         materials[materialName] = materialNow;

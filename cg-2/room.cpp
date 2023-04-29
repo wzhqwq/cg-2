@@ -6,11 +6,17 @@
 //
 
 #include "room.hpp"
+#include "common.h"
+#include "basic.hpp"
+#include "assembled.hpp"
+#include "scene.hpp"
+#include "outterObject.hpp"
+#include "light.hpp"
 
 void buildRoom(string baseUrl) {
     Cube *room = new Cube();
-    room->scale(vec3(10));
-    room->translate(vec3(0, 5, 0));
+    room->scale(vec3(8, 6, 8));
+    room->translate(vec3(0, 3, 0));
     room->material.texture = textures.cubeTest;
     room->reverse();
     mainScene->objects.push_back(room);
@@ -34,4 +40,11 @@ void buildRoom(string baseUrl) {
     
     OutterObject *slime = new OutterObject(baseUrl + "/object/Slime.obj");
     mainScene->objects.push_back(slime);
+    
+    DirectionalLight sunLight(vec3(-1, -1, -1), vec3(1, 1, 0.9));
+    PointLight roomLight(vec3(0, 5, 0), vec3(1, 1, 1));
+    roomLight.intensity = 1.0f;
+    
+//    sunLight.setLight();
+    roomLight.setLight();
 }

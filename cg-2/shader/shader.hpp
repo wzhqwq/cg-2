@@ -19,8 +19,10 @@ public:
     ShapeShader(string basePath);
     
     GLuint program;
-    GLuint mvpLoc, mvLoc, modeLoc;
-    GLuint ambientLoc, diffuseLoc, specularLoc, opacityLoc;
+    GLuint modelLoc, viewLoc, projectionLoc, modeLoc;
+    GLuint ambientLoc, diffuseLoc, specularLoc;
+    GLuint materialCoefficientsLoc;
+    GLuint lightPosLoc, lightColorLoc, lightIntensityLoc;
 };
 
 GLuint loadProgram(string vert, string frag);
