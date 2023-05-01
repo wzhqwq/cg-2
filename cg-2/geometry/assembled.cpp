@@ -30,6 +30,18 @@ void Table::setup() {
     addObject(leg2);
     addObject(leg3);
     addObject(leg4);
+    
+    shadowTop = new ShadowPlane();
+    shadowTop->scale(vec3(sx, 1, sz));
+    shadowTop->translate(vec3(0, sy, 0));
+    addObject(shadowTop);
+}
+void Table::putOnObject(Object *obj) {
+    addObject(obj);
+    shadowTop->casters.push_back(obj);
+}
+void Table::updateLight(Light light) {
+    shadowTop->updateLight(light);
 }
 
 void Chair::setup() {
@@ -110,4 +122,30 @@ void Globe::setup() {
     addObject(bottom);
     addObject(arc);
     addObject(rod);
+}
+
+void Room::setup() {
+    Cube *cube = new Cube();
+    cube->scale(vec3(w, h, w));
+    cube->translate(vec3(0, h / 2, 0));
+    cube->material.texture = textures.cubeTest;
+    cube->material.smoothness = 0.2f;
+    cube->reverse();
+    addObject(cube);
+    
+    ShadowPlane *bottom = new ShadowPlane();
+    bottom->scale(vec3(w, 1, w));
+    addObject(bottom);
+    shadowPlanes.push_back(bottom);
+}
+void Room::putInObject(Object *obj) {
+    addObject(obj);
+    for (auto plane : shadowPlanes) {
+        plane->casters.push_back(obj);
+    }
+}
+void Room::updateLight(Light light) {
+    for (auto plane : shadowPlanes) {
+        plane->updateLight(light);
+    }
 }

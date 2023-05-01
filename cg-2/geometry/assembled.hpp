@@ -12,6 +12,7 @@
 #include "geometry.hpp"
 #include "basic.hpp"
 #include "texture.hpp"
+#include "shadow.hpp"
 
 #define TABLE_H 1.4f
 #define TABLE_TOP_W 2.0f
@@ -38,17 +39,22 @@
 
 class Table : public Group {
 public:
-    Table() : Group() {
+    Table() {
         setup();
     }
+    void putOnObject(Object *obj);
+    void updateLight(Light light);
+    
     float sx = TABLE_TOP_W, sy = TABLE_H + TABLE_TOP_H / 2, sz = TABLE_TOP_W;
 private:
     void setup();
+    
+    ShadowPlane *shadowTop;
 };
 
 class Chair : public Group {
 public:
-    Chair() : Group() {
+    Chair() {
         setup();
     }
     float sx = CHAIR_SIT_SURFACE_W, sy = CHAIR_H_2 + CHAIR_BACK_H / 2, sz = CHAIR_SIT_SURFACE_W;
@@ -58,12 +64,27 @@ private:
 
 class Globe : public Group {
 public:
-    Globe() : Group() {
+    Globe() {
         setup();
     }
     float sx = GLOBE_ARC_W, sy = GLOBE_BALL_H + GLOBE_ARC_W / 2, sz = GLOBE_ARC_W;
 private:
     void setup();
+};
+
+class Room : public Group {
+public:
+    Room(float width, float height) : w(width), h(height) {
+        setup();
+    }
+    
+    void putInObject(Object *obj);
+    void updateLight(Light light);
+private:
+    void setup();
+    
+    vector<ShadowPlane *> shadowPlanes;
+    float w, h;
 };
 
 #endif /* assembled_hpp */

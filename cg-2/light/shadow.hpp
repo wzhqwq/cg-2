@@ -15,8 +15,7 @@
 
 class ShadowPlane : public Geometry {
 public:
-    ShadowPlane(Light light) {
-        updateLight(light);
+    ShadowPlane() {
         setup();
         updateBuffer();
     }

@@ -16,6 +16,8 @@ out vec3 pos;
 
 void main() {
     vec4 worldPos = Model * vec4(position, 1);
+    // 阴影矩阵可能会导致最终model矩阵齐次系数为负数，所以对世界坐标处理一下
+    worldPos /= worldPos.w;
     vec4 viewPos = View * worldPos;
     gl_Position = Projection * viewPos;
 
@@ -24,5 +26,5 @@ void main() {
     vec4 worldNormal = Model * vec4(normal, 0);
     normalInterp = normalize(worldNormal.xyz);
     v = (inverse(View) * vec4(normalize(-viewPos.xyz), 0)).xyz;
-    pos = worldPos.xyz / worldPos.w;
+    pos = worldPos.xyz;
 }

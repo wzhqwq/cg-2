@@ -62,13 +62,15 @@ void main() {
     vec3 n = normalize(normalInterp);
     vec3 h = normalize(l + v);
     
-    vec3 Ia = lightColor * lightIntensity * 0.1f;
+    vec3 Ia = lightColor * lightIntensity * 0.15f;
     vec3 Id = lightColor * lightIntensity;
     vec3 Is = lightColor * lightIntensity * smoothness;
+    // sRGB色域下的灰度计算公式
+    float kdGray = dot(kd, vec3(0.2126, 0.7152, 0.0722));
     float lambertian = max(0, dot(l, n)), specAngle = max(0, dot(n, h));
     color = vec4(kd * Id * lambertian / distance +
                  ks * Is * pow(specAngle, shininess / 4) / distance +
-                 ka * Ia,
+                 ka * Ia * kdGray,
                  opacity);
 //    color = vec4(kd * Id * max(0, dot(l, n)) + ka * Ia, opacity);
 //    color = vec4(n / 2 + 0.5, 1);

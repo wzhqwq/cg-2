@@ -17,6 +17,7 @@ using namespace glm;
 int altPressed = 0;
 float camDist = 10.0f, camAngle = pi<float>() * -0.1, camHeight = 5.0f;
 Scene *mainScene;
+RoomControl *room;
 
 void render() {
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
@@ -41,6 +42,12 @@ void render() {
 void keyCallback(GLFWwindow *window, int key, int scancode, int action, int mods) {
     if (action == GLFW_RELEASE) {
         switch (key) {
+            case GLFW_KEY_D:
+                room->toDay();
+                break;
+            case GLFW_KEY_N:
+                room->toNight();
+                break;
         }
     }
     altPressed = (mods & GLFW_MOD_ALT) != 0;
@@ -95,7 +102,8 @@ int main(int argc, char * argv[]) {
     mainScene = new Scene(WIDTH, HEIGHT);
     mainScene->moveTo(vec3(camDist * sin(camAngle), camHeight, camDist * cos(camAngle)));
 
-    buildRoom(argv[1]);
+    room = new RoomControl();
+    room->buildRoom(argv[1]);
     
 //    glfwSetCursorPosCallback(window, mouseMoveCallback);
 //    glfwSetMouseButtonCallback(window, mouseButtonCallback);

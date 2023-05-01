@@ -46,6 +46,7 @@ void ShadowPlane::paint() {
 
     // 绘制平面，使用阴影材质
     glBindVertexArray(VAO);
+//    unlitRedMaterial.useMaterial();
     shadowMaterial.useMaterial();
     glUniformMatrix4fv(shapeShader->modelLoc, 1, GL_FALSE, &modelMatrix[0][0]);
     glDrawElements(GL_TRIANGLES, (int) indices.size() * 3, GL_UNSIGNED_INT, 0);
@@ -82,13 +83,18 @@ void ShadowPlane::updateShadowMatrix() {
                                -lightPosDir.y * plane,
                                -lightPosDir.z * plane,
                                vec4(0));
-        shadowMatrix = transpose(baseMatrix + mat4(denominator)) / denominator;
+        // glm是列优先访存，因此要做转置
+        shadowMatrix = transpose(baseMatrix + mat4(denominator));
     }
     else {
+        //    a(x - lx) + b(y - ly) + c(z - lz) + d = 0
+        // => a*x + b*y + c*z + d + a*lx + b*ly + c*lz = 0
+        // => new_d = d + a*lx + b*ly + c*lz
+        float newD = plane.w + dot(vec3(lightPosDir), vec3(plane));
         mat4 baseMatrix = mat4(vec4(1, 0, 0, 0),
                                vec4(0, 1, 0, 0),
                                vec4(0, 0, 1, 0),
-                               vec4(vec3(plane), 0) / -plane.w);
+                               vec4(vec3(plane) / -newD, 0));
         shadowMatrix = (glm::translate(mat4(1), vec3(lightPosDir)) *
                         transpose(baseMatrix) *
                         glm::translate(mat4(1), -vec3(lightPosDir)));
