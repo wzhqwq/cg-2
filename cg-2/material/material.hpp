@@ -12,7 +12,8 @@
 #include "texture.hpp"
 
 enum RenderMode {
-    SingleColor, TexMask, TexPure, TexTest
+    SingleColor, UnlitSingleColor, TexTest,
+    TexMask = 8, TexPure
 };
 
 class Material {
@@ -36,6 +37,9 @@ public:
 extern Material woodMaterial;
 extern Material earthMaterial;
 extern Material vaseMaterial;
+extern Material shadowMaterial;
+extern Material transparentMaterial;
+extern Material unlitRedMaterial;
 
 void initMaterials();
 

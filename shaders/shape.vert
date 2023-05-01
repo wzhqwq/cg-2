@@ -24,5 +24,5 @@ void main() {
     vec4 worldNormal = Model * vec4(normal, 0);
     normalInterp = normalize(worldNormal.xyz);
     v = (inverse(View) * vec4(normalize(-viewPos.xyz), 0)).xyz;
-    pos = worldPos.xyz;
+    pos = worldPos.xyz / worldPos.w;
 }

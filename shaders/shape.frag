@@ -21,6 +21,21 @@ uniform sampler2D ourTexture;
 out vec4 color;
 
 void main() {
+    float opacity = materialCoefficients.x;
+    float shininess = materialCoefficients.y;
+    float smoothness = materialCoefficients.z;
+    
+    if (mode == 1) {
+        // unlit single color
+        color = vec4(diffuse, opacity);
+        return;
+    }
+    if (mode == 2) {
+        // texture coordination test
+        color = vec4(TexCoord, 0, opacity);
+        return;
+    }
+
     vec3 kd = vec3(0.0, 0.0, 0.0);
     vec3 ka = ambient;
     vec3 ks = specular;
@@ -29,20 +44,14 @@ void main() {
     if (mode == 0) {
         kd = diffuse;
     }
-    else if (mode == 1) {
+    else if (mode == 8) {
         // texture mask mode
         kd = textureColor.a * diffuse + (1 - textureColor.a) * vec3(1.0, 1.0, 1.0);
     }
-    else if (mode == 2) {
+    else if (mode == 9) {
         // texture
         kd = textureColor.rgb;
     }
-    else if (mode == 3) {
-        // texture coordination test
-        color = vec4(TexCoord, 0, 1);
-        return;
-    }
-    
     vec3 l = -lightPosDir.xyz;
     float distance = 1.0f;
     if (lightPosDir.w > 0.5) {
@@ -52,10 +61,6 @@ void main() {
     }
     vec3 n = normalize(normalInterp);
     vec3 h = normalize(l + v);
-    
-    float opacity = materialCoefficients.x;
-    float shininess = materialCoefficients.y;
-    float smoothness = materialCoefficients.z;
     
     vec3 Ia = lightColor * lightIntensity * 0.1f;
     vec3 Id = lightColor * lightIntensity;

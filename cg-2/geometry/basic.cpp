@@ -136,8 +136,8 @@ void Ring::setup(int slices, int stacks, float inset, float start, float end) {
     float R = inset / 2 + r;
     for (int i = 0; i <= slices; i++) {
         float longitude = 2 * Pi * i / slices;
-        vec4 pos = vec4(r * sin(longitude) + R, r * cos(longitude), 0, 0);
-        vec4 normal = vec4(sin(longitude), cos(longitude), 0, 1);
+        vec4 pos = vec4(r * sin(longitude) + R, r * cos(longitude), 0, 1);
+        vec4 normal = vec4(sin(longitude), cos(longitude), 0, 0);
         
         // 起始面的法线是起始角+90度
         addVert(vec3(R * cos(start), 0, -R * sin(start)),
@@ -222,51 +222,51 @@ void Vase::setup(int rSub, int bSub) {
         // 外部
         // 下段+3
         for (int j = 0; j < bSub; j++) {
-            vec4 point = vec4(quadricBezier(vaseCurve1, 1.0f * j / bSub), 0, 0);
-            vec4 normal = vec4(rSpin90(quadricBezierDerivative(vaseCurve1, 1.0f * j / bSub)), 0, 1);
+            vec4 point = vec4(quadricBezier(vaseCurve1, 1.0f * j / bSub), 0, 1);
+            vec4 normal = vec4(rSpin90(quadricBezierDerivative(vaseCurve1, 1.0f * j / bSub)), 0, 0);
             addVert(vec3(rMat * point),
                     vec2(texFragX * i, texFragY * (j * sub3 + 2)),
                     vec3(rMat * normal));
         }
         // 中段+5
         for (int j = 0; j < bSub; j++) {
-            vec4 point = vec4(cubicBezier(vaseCurve2, 1.0f * j / bSub), 0, 0);
-            vec4 normal = vec4(rSpin90(cubicBezierDerivative(vaseCurve2, 1.0f * j / bSub)), 0, 1);
+            vec4 point = vec4(cubicBezier(vaseCurve2, 1.0f * j / bSub), 0, 1);
+            vec4 normal = vec4(rSpin90(cubicBezierDerivative(vaseCurve2, 1.0f * j / bSub)), 0, 0);
             addVert(vec3(rMat * point),
                     vec2(texFragX * i, texFragY * (j * sub5 + 5)),
                     vec3(rMat * normal));
         }
         // 上段+2
         for (int j = 0; j <= bSub; j++) {
-            vec4 point = vec4(quadricBezier(vaseCurve3, 1.0f * j / bSub), 0, 0);
-            vec4 normal = vec4(rSpin90(quadricBezierDerivative(vaseCurve3, 1.0f * j / bSub)), 0, 1);
+            vec4 point = vec4(quadricBezier(vaseCurve3, 1.0f * j / bSub), 0, 1);
+            vec4 normal = vec4(rSpin90(quadricBezierDerivative(vaseCurve3, 1.0f * j / bSub)), 0, 0);
             addVert(vec3(rMat * point),
                     vec2(texFragX * i, texFragY * (j * sub2 + 10)),
                     vec3(rMat * normal));
         }
         // 边缘+1
-        addVert(vec3(rMat * vec4(0.2f, 1, 0, 0)), vec2(texFragX * i, texFragY * 12), vec3(0, 1, 0));
+        addVert(vec3(rMat * vec4(0.2f, 1, 0, 1)), vec2(texFragX * i, texFragY * 12), vec3(0, 1, 0));
         // 内部
         // 上段+2
         for (int j = 0; j < bSub; j++) {
-            vec4 point = vec4(quadricBezier(vaseCurve4, 1.0f * j / bSub), 0, 0);
-            vec4 normal = vec4(rSpin90(quadricBezierDerivative(vaseCurve4, 1.0f * j / bSub)), 0, 1);
+            vec4 point = vec4(quadricBezier(vaseCurve4, 1.0f * j / bSub), 0, 1);
+            vec4 normal = vec4(rSpin90(quadricBezierDerivative(vaseCurve4, 1.0f * j / bSub)), 0, 0);
             addVert(vec3(rMat * point),
                     vec2(texFragX * i, texFragY * (j * sub2 + 13)),
                     vec3(rMat * normal));
         }
         // 中段+5
         for (int j = 0; j < bSub; j++) {
-            vec4 point = vec4(cubicBezier(vaseCurve5, 1.0f * j / bSub), 0, 0);
-            vec4 normal = vec4(rSpin90(cubicBezierDerivative(vaseCurve5, 1.0f * j / bSub)), 0, 1);
+            vec4 point = vec4(cubicBezier(vaseCurve5, 1.0f * j / bSub), 0, 1);
+            vec4 normal = vec4(rSpin90(cubicBezierDerivative(vaseCurve5, 1.0f * j / bSub)), 0, 0);
             addVert(vec3(rMat * point),
                     vec2(texFragX * i, texFragY * (j * sub5 + 15)),
                     vec3(rMat * normal));
         }
         // 下段+3
         for (int j = 0; j <= bSub; j++) {
-            vec4 point = vec4(quadricBezier(vaseCurve6, 1.0f * j / bSub), 0, 0);
-            vec4 normal = vec4(rSpin90(quadricBezierDerivative(vaseCurve6, 1.0f * j / bSub)), 0, 1);
+            vec4 point = vec4(quadricBezier(vaseCurve6, 1.0f * j / bSub), 0, 1);
+            vec4 normal = vec4(rSpin90(quadricBezierDerivative(vaseCurve6, 1.0f * j / bSub)), 0, 0);
             addVert(vec3(rMat * point),
                     vec2(texFragX * i, texFragY * (j * sub3 + 20)),
                     vec3(rMat * normal));

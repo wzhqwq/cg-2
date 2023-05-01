@@ -23,6 +23,20 @@ void Geometry::paint() {
 
     glBindVertexArray(0);
 }
+void Geometry::castShadow(mat4 t){
+    glBindVertexArray(VAO);
+    
+    mat4 shadowMatrix = t * modelMatrix;
+    glUniformMatrix4fv(shapeShader->modelLoc, 1, GL_FALSE, &shadowMatrix[0][0]);
+    if (indices.size()) {
+        glDrawElements(renderType, (int) indices.size() * 3, GL_UNSIGNED_INT, 0);
+    }
+    else {
+        glDrawArrays(renderType, 0, (int) vertices.size() / 3);
+    }
+
+    glBindVertexArray(0);
+}
 
 void Geometry::setMode(DrawMode mode) {
     switch (mode) {
@@ -90,6 +104,7 @@ GLuint Geometry::getVAO() {
 
 void Object::applyTransformation(mat4 matrix) {}
 void Object::paint() {}
+void Object::castShadow(mat4 t) {}
 void Object::translate(vec3 t) {
     applyTransformation(glm::translate(mat4(1.0f), t));
     origin = glm::translate(mat4(1.0f), t) * vec4(origin, 1);
@@ -112,5 +127,10 @@ void Group::addObject(Object *obj) {
 void Group::paint() {
     for (auto o : objects) {
         o->paint();
+    }
+}
+void Group::castShadow(mat4 t) {
+    for (auto o : objects) {
+        o->castShadow(t);
     }
 }

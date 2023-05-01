@@ -25,6 +25,7 @@
 		607F51EF29F8A65D00456824 /* outterObject.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 607F51ED29F8A65D00456824 /* outterObject.cpp */; };
 		60E3DF3629FA17DE00562C7C /* material.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 60E3DF3429FA17DE00562C7C /* material.cpp */; };
 		60E3DF3929FB6CFE00562C7C /* light.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 60E3DF3729FB6CFE00562C7C /* light.cpp */; };
+		60E3DF3D29FD12DB00562C7C /* shadow.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 60E3DF3B29FD12DB00562C7C /* shadow.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -88,6 +89,8 @@
 		60E3DF3529FA17DE00562C7C /* material.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = material.hpp; sourceTree = "<group>"; };
 		60E3DF3729FB6CFE00562C7C /* light.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = light.cpp; sourceTree = "<group>"; };
 		60E3DF3829FB6CFE00562C7C /* light.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = light.hpp; sourceTree = "<group>"; };
+		60E3DF3B29FD12DB00562C7C /* shadow.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = shadow.cpp; sourceTree = "<group>"; };
+		60E3DF3C29FD12DB00562C7C /* shadow.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = shadow.hpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -131,8 +134,7 @@
 				60E3DF3229FA177900562C7C /* material */,
 				607F519A29ED622B00456824 /* tools */,
 				607F51AA29ED622B00456824 /* geometry */,
-				60E3DF3729FB6CFE00562C7C /* light.cpp */,
-				60E3DF3829FB6CFE00562C7C /* light.hpp */,
+				60E3DF3A29FD12C300562C7C /* light */,
 				607F519729ED622B00456824 /* scene.cpp */,
 				607F519829ED622B00456824 /* scene.hpp */,
 				607F51D829F43FD400456824 /* room.cpp */,
@@ -238,6 +240,17 @@
 			path = shader;
 			sourceTree = "<group>";
 		};
+		60E3DF3A29FD12C300562C7C /* light */ = {
+			isa = PBXGroup;
+			children = (
+				60E3DF3B29FD12DB00562C7C /* shadow.cpp */,
+				60E3DF3C29FD12DB00562C7C /* shadow.hpp */,
+				60E3DF3729FB6CFE00562C7C /* light.cpp */,
+				60E3DF3829FB6CFE00562C7C /* light.hpp */,
+			);
+			path = light;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -296,6 +309,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				607F51B129ED622C00456824 /* scene.cpp in Sources */,
+				60E3DF3D29FD12DB00562C7C /* shadow.cpp in Sources */,
 				607F51B829ED622C00456824 /* shader.cpp in Sources */,
 				607F51DA29F43FD400456824 /* room.cpp in Sources */,
 				607F51EF29F8A65D00456824 /* outterObject.cpp in Sources */,

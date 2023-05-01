@@ -23,6 +23,7 @@ class Object {
 public:
     virtual void applyTransformation(mat4 matrix);
     virtual void paint();
+    virtual void castShadow(mat4 t);
     void translate(vec3 t);
     void scale(vec3 s);
     void rotate(float angle, vec3 axis);
@@ -47,6 +48,7 @@ public:
     
     void applyTransformation(mat4 matrix);
     void paint();
+    void castShadow(mat4 t);
     void setMode(DrawMode mode);
     void reverse();
 
@@ -77,6 +79,7 @@ public:
     void applyTransformation(mat4 matrix);
     void addObject(Object *obj);
     void paint();
+    void castShadow(mat4 t);
 private:
     vector<Object *> objects;
 };
