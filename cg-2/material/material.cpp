@@ -11,12 +11,26 @@
 Material woodMaterial;
 Material earthMaterial;
 Material vaseMaterial;
+Material floorMaterial;
+Material wallMaterial;
+
 Material shadowMaterial(vec3(0, 0, 0));
 Material transparentMaterial(vec3(0, 0, 0));
 Material unlitRedMaterial(vec3(1, 0, 0));
 
 void Material::useMaterial() {
-    if (mode & 8) glBindTexture(GL_TEXTURE_2D, texture);
+    if (mode & 8) {
+        glActiveTexture(GL_TEXTURE0);
+        glBindTexture(GL_TEXTURE_2D, texture);
+        if (mode & 2) {
+            glActiveTexture(GL_TEXTURE1);
+            glBindTexture(GL_TEXTURE_2D, NMTexture);
+        }
+    }
+    if (mode == UnlitTex) {
+        glActiveTexture(GL_TEXTURE0);
+        glBindTexture(GL_TEXTURE_2D, texture);
+    }
     
     if (translucent) {
         glEnable(GL_BLEND);
@@ -39,6 +53,18 @@ void initMaterials() {
     earthMaterial.texture = textures.earth;
     vaseMaterial.texture = textures.marble;
     vaseMaterial.shininess = 200.0f;
+    
+    floorMaterial.mode = TexWithNormal;
+    floorMaterial.texture = textures.floor;
+    floorMaterial.NMTexture = textures.floorNM;
+    floorMaterial.smoothness = 0.5f;
+    floorMaterial.shininess = 10.0f;
+    
+    wallMaterial.mode = TexWithNormal;
+    wallMaterial.texture = textures.wall;
+    wallMaterial.NMTexture = textures.wallNM;
+    wallMaterial.smoothness = 0.2f;
+    wallMaterial.shininess = 10.0f;
     
     shadowMaterial.mode = UnlitSingleColor;
     shadowMaterial.translucent = 1;

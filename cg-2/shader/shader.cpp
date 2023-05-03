@@ -44,4 +44,8 @@ ShapeShader::ShapeShader(string basePath) {
     lightPosLoc = glGetUniformLocation(program, "lightPosDir");
     lightColorLoc = glGetUniformLocation(program, "lightColor");
     lightIntensityLoc = glGetUniformLocation(program, "lightIntensity");
+    
+    glUseProgram(program);
+    glUniform1i(glGetUniformLocation(program, "texture1"), 0);
+    glUniform1i(glGetUniformLocation(program, "texture2"), 1);
 }

@@ -125,13 +125,37 @@ void Globe::setup() {
 }
 
 void Room::setup() {
-    Cube *cube = new Cube();
-    cube->scale(vec3(w, h, w));
-    cube->translate(vec3(0, h / 2, 0));
-    cube->material.texture = textures.cubeTest;
-    cube->material.smoothness = 0.2f;
-    cube->reverse();
-    addObject(cube);
+//    Cube *cube = new Cube();
+//    cube->scale(vec3(w, h, w));
+//    cube->translate(vec3(0, h / 2, 0));
+//    cube->material.texture = textures.cubeTest;
+//    cube->material.smoothness = 0.2f;
+//    cube->reverse();
+//    addObject(cube);
+    Plane *floor = new Plane(w / 2, w / 2);
+    floor->scale(vec3(w, w, 1));
+    floor->rotate(-r90, vec3(1, 0, 0));
+    floor->material = floorMaterial;
+    addObject(floor);
+    
+    Plane *wall1 = new Plane(w, h), *wall2 = new Plane(w, h);
+    Plane *wall3 = new Plane(w, h), *wall4 = new Plane(w, h);
+    wall1->scale(vec3(w, h, 1));
+    wall2->scale(vec3(w, h, 1));
+    wall3->scale(vec3(w, h, 1));
+    wall4->scale(vec3(w, h, 1));
+    wall2->rotate(r180, vec3(0, 1, 0));
+    wall3->rotate(-r90, vec3(0, 1, 0));
+    wall4->rotate(r90, vec3(0, 1, 0));
+    wall1->translate(vec3(0, h / 2, -w / 2));
+    wall2->translate(vec3(0, h / 2, w / 2));
+    wall3->translate(vec3(w / 2, h / 2, 0));
+    wall4->translate(vec3(-w / 2, h / 2, 0));
+    wall1->material = wall2->material = wall3->material = wall4->material = wallMaterial;
+    addObject(wall1);
+    addObject(wall2);
+    addObject(wall3);
+    addObject(wall4);
     
     ShadowPlane *bottom = new ShadowPlane();
     bottom->scale(vec3(w, 1, w));

@@ -35,8 +35,6 @@ void RoomControl::buildRoom(string baseUrl) {
     slime->translate(vec3(2, 0, 0));
     room->putInObject(slime);
     
-//    roomLight.intensity = 1.5f;
-//    room->translate(vec3(0, -5, 0));
     toDay();
 }
 

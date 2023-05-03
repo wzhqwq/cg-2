@@ -18,8 +18,8 @@ GLuint loadTexture(string path) {
     glGenTextures(1, &texture);
     glBindTexture(GL_TEXTURE_2D, texture);
     
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
     glPixelStorei(GL_UNPACK_ALIGNMENT, 1);
 
     glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, width, height, 0, GL_RGBA, GL_UNSIGNED_BYTE, data);
@@ -37,7 +37,12 @@ void initTexture(string basePath) {
     textures.move = loadTexture(basePath + "move.png");
     textures.cubeTest = loadTexture(basePath + "cube_test.png");
     textures.wood = loadTexture(basePath + "wood.jpg");
+    textures.wood1 = loadTexture(basePath + "wood_1.jpg");
     textures.earth = loadTexture(basePath + "earth.jpg");
     textures.chessboard = loadTexture(basePath + "chessboard.jpg");
     textures.marble = loadTexture(basePath + "marble.jpg");
+    textures.floor = loadTexture(basePath + "floor.jpg");
+    textures.floorNM = loadTexture(basePath + "floor_nm.jpg");
+    textures.wall = loadTexture(basePath + "wall.jpg");
+    textures.wallNM = loadTexture(basePath + "wall_nm.jpg");
 }

@@ -12,8 +12,8 @@
 #include "texture.hpp"
 
 enum RenderMode {
-    SingleColor, UnlitSingleColor, TexTest,
-    TexMask = 8, TexPure
+    SingleColor, UnlitSingleColor, TexTest, UnlitTex,
+    TexPure = 8, TexMask, TexWithNormal, TexMaskWithNormal
 };
 
 class Material {
@@ -21,7 +21,7 @@ public:
     Material() : mode(TexPure) {}
     Material(vec3 color) : diffuseColor(color), mode(SingleColor) {}
     
-    GLuint texture;
+    GLuint texture, NMTexture;
     vec3 ambientColor = vec3(1, 1, 1);
     vec3 diffuseColor;
     vec3 specularColor = vec3(0.5f, 0.5f, 0.5f);
@@ -37,6 +37,9 @@ public:
 extern Material woodMaterial;
 extern Material earthMaterial;
 extern Material vaseMaterial;
+extern Material floorMaterial;
+extern Material wallMaterial;
+
 extern Material shadowMaterial;
 extern Material transparentMaterial;
 extern Material unlitRedMaterial;

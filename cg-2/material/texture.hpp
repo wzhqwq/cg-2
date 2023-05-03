@@ -15,7 +15,9 @@
 using namespace std;
 
 struct Textures {
-    GLuint selection, move, magnifier, cameraRotate, cubeTest, wood, earth, chessboard, marble;
+    GLuint selection, move, magnifier, cameraRotate;
+    GLuint cubeTest, wood, earth, chessboard, marble, wood1;
+    GLuint floor, floorNM, wall, wallNM;
 };
 
 GLuint loadTexture(string path);

@@ -35,4 +35,7 @@ inline void printMat(const char *label, mat4 m) {
     printf("\t\t %.2f %.2f %.2f %.2f)\n", m[3][0], m[3][1], m[3][2], m[3][3]);
 }
 
+const float r90 = pi<float>() / 2;
+const float r180 = pi<float>();
+
 #endif /* common_h */

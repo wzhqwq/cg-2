@@ -13,6 +13,7 @@ out vec2 TexCoord;
 out vec3 normalInterp;
 out vec3 v;
 out vec3 pos;
+out mat3 TBN;
 
 void main() {
     vec4 worldPos = Model * vec4(position, 1);
@@ -27,4 +28,10 @@ void main() {
     normalInterp = normalize(worldNormal.xyz);
     v = (inverse(View) * vec4(normalize(-viewPos.xyz), 0)).xyz;
     pos = worldPos.xyz;
+    
+    // 切线空间标架计算，仅考虑平面的法线贴图（各点切线空间相同，偷个懒），平面初始位置面向z轴正方向
+    vec3 T = normalize(vec3(Model * vec4(1, 0, 0, 0)));
+    vec3 B = normalize(vec3(Model * vec4(0, 1, 0, 0)));
+    vec3 N = normalize(vec3(Model * vec4(0, 0, 1, 0)));
+    TBN = mat3(T, B, N);
 }

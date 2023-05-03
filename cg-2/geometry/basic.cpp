@@ -285,3 +285,19 @@ void Vase::setup(int rSub, int bSub) {
         addFrag(offset + aSub - 1, nextOffset + aSub - 1, offset + aSub);
     }
 }
+
+void Plane::setup(int slicesX, int slicesY) {
+    float fragX = 1.0f / slicesX, fragY = 1.0f / slicesY;
+    for (int i = 0; i <= slicesX; i++) {
+        for (int j = 0; j <= slicesY; j++) {
+            addVert(vec3(fragX * i - 0.5f, fragY * j - 0.5f, 0), vec2(i, j), vec3(0, 0, 1));
+        }
+    }
+    for (int i = 0; i < slicesX; i++) {
+        int offset = (slicesY + 1) * i;
+        int nextOffset = offset + (slicesY + 1);
+        for (int j = 0; j < slicesY; j++) {
+            addFrag(offset + j + 1, offset + j, nextOffset + j, nextOffset + j + 1);
+        }
+    }
+}

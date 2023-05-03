@@ -3,6 +3,7 @@
 in vec3 normalInterp;
 in vec3 v;
 in vec3 pos;
+in mat3 TBN;
 
 in vec2 TexCoord;
 
@@ -16,7 +17,8 @@ uniform vec4 lightPosDir;
 uniform vec3 lightColor;
 uniform float lightIntensity;
 
-uniform sampler2D ourTexture;
+uniform sampler2D texture1;
+uniform sampler2D texture2;
 
 out vec4 color;
 
@@ -35,22 +37,33 @@ void main() {
         color = vec4(TexCoord, 0, opacity);
         return;
     }
+    if (mode == 3) {
+        // unlit texture
+        color = vec4(vec3(texture(texture1, TexCoord)), opacity);
+        return;
+    }
 
-    vec3 kd = vec3(0.0, 0.0, 0.0);
+    vec3 kd = diffuse;
     vec3 ka = ambient;
     vec3 ks = specular;
     
-    vec4 textureColor = texture(ourTexture, TexCoord);
-    if (mode == 0) {
-        kd = diffuse;
-    }
-    else if (mode == 8) {
-        // texture mask mode
-        kd = textureColor.a * diffuse + (1 - textureColor.a) * vec3(1.0, 1.0, 1.0);
-    }
-    else if (mode == 9) {
-        // texture
-        kd = textureColor.rgb;
+    vec3 n = normalize(normalInterp);
+    if ((mode & 8) != 0) {
+        vec4 textureColor = texture(texture1, TexCoord);
+        if ((mode & 1) != 0) {
+            // texture mask mode
+            kd = textureColor.a * diffuse + (1 - textureColor.a) * vec3(1.0, 1.0, 1.0);
+        }
+        else {
+            // texture
+            kd = textureColor.rgb;
+        }
+        if ((mode & 2) != 0) {
+            // with normal map
+            n = texture(texture2, TexCoord).xyz;
+            n = normalize(n * 2.0 - 1.0);
+            n = normalize(TBN * n);
+        }
     }
     vec3 l = -lightPosDir.xyz;
     float distance = 1.0f;
@@ -59,7 +72,6 @@ void main() {
         distance = length(lightPosDir.xyz - pos);
         distance = max(1, distance / 3);
     }
-    vec3 n = normalize(normalInterp);
     vec3 h = normalize(l + v);
     
     vec3 Ia = lightColor * lightIntensity * 0.15f;

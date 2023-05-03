@@ -75,4 +75,15 @@ private:
     void setup(int slices, int stacks);
 };
 
+class Plane : public Geometry {
+public:
+    Plane() : Plane(1, 1) {}
+    Plane(int matSlicesX, int matSlicesY) {
+        setup(matSlicesX, matSlicesY);
+        updateBuffer();
+    }
+private:
+    void setup(int slicesX, int slicesY);
+};
+
 #endif /* basic_hpp */
