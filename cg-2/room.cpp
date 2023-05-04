@@ -35,6 +35,10 @@ void RoomControl::buildRoom(string baseUrl) {
     slime->translate(vec3(2, 0, 0));
     room->putInObject(slime);
     
+    bulb = new Bulb();
+    bulb->translate(vec3(0, 6, 0));
+    mainScene->objects.push_back(bulb);
+    
     toDay();
 }
 
@@ -42,10 +46,12 @@ void RoomControl::toDay() {
     sunLight.setLight();
     room->updateLight(sunLight);
     table->updateLight(sunLight);
+    bulb->setOff();
 }
 
 void RoomControl::toNight() {
     roomLight.setLight();
     room->updateLight(roomLight);
     table->updateLight(roomLight);
+    bulb->setOn();
 }

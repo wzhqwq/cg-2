@@ -87,4 +87,18 @@ private:
     float w, h;
 };
 
+class Bulb : public Group {
+public:
+    Bulb() {
+        setup();
+    }
+    
+    void setOff();
+    void setOn();
+private:
+    void setup();
+    
+    Sphere *head;
+};
+
 #endif /* assembled_hpp */

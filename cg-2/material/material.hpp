@@ -43,6 +43,8 @@ extern Material wallMaterial;
 extern Material shadowMaterial;
 extern Material transparentMaterial;
 extern Material unlitRedMaterial;
+extern Material unlitBulbOffMaterial;
+extern Material unlitBulbOnMaterial;
 
 void initMaterials();
 

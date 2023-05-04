@@ -17,6 +17,8 @@ Material wallMaterial;
 Material shadowMaterial(vec3(0, 0, 0));
 Material transparentMaterial(vec3(0, 0, 0));
 Material unlitRedMaterial(vec3(1, 0, 0));
+Material unlitBulbOffMaterial(vec3(1));
+Material unlitBulbOnMaterial(vec3(1, 1, 0.5));
 
 void Material::useMaterial() {
     if (mode & 8) {
@@ -73,4 +75,9 @@ void initMaterials() {
     transparentMaterial.translucent = 1;
     transparentMaterial.opacity = 0.0f;
     unlitRedMaterial.mode = UnlitSingleColor;
+    
+    unlitBulbOffMaterial.mode = UnlitSingleColor;
+    unlitBulbOffMaterial.opacity = 0.5;
+    unlitBulbOffMaterial.translucent = 1;
+    unlitBulbOnMaterial.mode = UnlitSingleColor;
 }

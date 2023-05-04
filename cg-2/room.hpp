@@ -29,8 +29,9 @@ private:
     Vase *vase;
     Globe *globe;
     OutterObject *slime;
+    Bulb *bulb;
     
-    DirectionalLight sunLight = DirectionalLight(vec3(-1, -1, 0.2), vec3(1, 1, 0.9));
+    DirectionalLight sunLight = DirectionalLight(vec3(-1, -1, -0.2), vec3(1, 1, 0.9));
     PointLight roomLight = PointLight(vec3(0, 5, 0), vec3(0.9, 0.9, 0.6));
 };
 

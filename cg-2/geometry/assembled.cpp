@@ -173,3 +173,21 @@ void Room::updateLight(Light light) {
         plane->updateLight(light);
     }
 }
+
+void Bulb::setup() {
+    head = new Sphere(10, 10);
+    head->scale(vec3(0.4f));
+    Cylinder *tail = new Cylinder(10);
+    tail->scale(vec3(0.2f));
+    tail->translate(vec3(0, 0.2f, 0));
+    tail->material = Material(vec3(1));
+    
+    addObject(head);
+    addObject(tail);
+}
+void Bulb::setOff() {
+    head->material = unlitBulbOffMaterial;
+}
+void Bulb::setOn() {
+    head->material = unlitBulbOnMaterial;
+}
