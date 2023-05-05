@@ -105,6 +105,9 @@ GLuint Geometry::getVAO() {
 void Object::applyTransformation(mat4 matrix) {}
 void Object::paint() {}
 void Object::castShadow(mat4 t) {}
+vec3 Object::getTranslation() {
+    return origin;
+}
 void Object::translate(vec3 t) {
     applyTransformation(glm::translate(mat4(1.0f), t));
     origin = glm::translate(mat4(1.0f), t) * vec4(origin, 1);
@@ -115,10 +118,15 @@ void Object::scale(vec3 s) {
 void Object::rotate(float angle, vec3 axis) {
     applyTransformation(glm::translate(glm::rotate(glm::translate(mat4(1.0f), -origin), angle, axis), origin));
 }
+void Object::translateOrigin(vec3 delta) {
+    origin += delta;
+}
 
 void Group::applyTransformation(mat4 matrix) {
+    vec3 translation = matrix * vec4(0, 0, 0, 1);
     for (auto o : objects) {
         o->applyTransformation(matrix);
+        o->translateOrigin(translation);
     }
 }
 void Group::addObject(Object *obj) {

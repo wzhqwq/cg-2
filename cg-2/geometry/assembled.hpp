@@ -101,4 +101,19 @@ private:
     Sphere *head;
 };
 
+class Arrow : public Group {
+public:
+    Arrow(float length) {
+        setup(length);
+    }
+    
+    void setColor(vec3 color);
+    void setOpacity(float opacity);
+private:
+    void setup(float length);
+    
+    Cone *head;
+    Cylinder *body;
+};
+
 #endif /* assembled_hpp */

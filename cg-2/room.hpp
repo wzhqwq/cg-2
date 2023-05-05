@@ -22,6 +22,7 @@ public:
     void buildRoom(string baseUrl);
     void toDay();
     void toNight();
+    Object *getItem(GLenum key);
 private:
     Room *room;
     Table *table;

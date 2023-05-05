@@ -11,13 +11,15 @@
 #include "texture.hpp"
 #include "room.hpp"
 #include "material.hpp"
+#include "geoControl.hpp"
 
 using namespace glm;
 
-int altPressed = 0;
+int altPressing = 0, shiftPressing = 0;
 float camDist = 10.0f, camAngle = pi<float>() * -0.1, camHeight = 5.0f;
 Scene *mainScene;
 RoomControl *room;
+GeoControl *control;
 
 void render() {
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
@@ -48,13 +50,33 @@ void keyCallback(GLFWwindow *window, int key, int scancode, int action, int mods
             case GLFW_KEY_N:
                 room->toNight();
                 break;
+            case GLFW_KEY_X:
+                control->toggle(0);
+                break;
+            case GLFW_KEY_Y:
+                control->toggle(1);
+                break;
+            case GLFW_KEY_Z:
+                control->toggle(2);
+                break;
+            case GLFW_KEY_ESCAPE:
+                control->hide();
+                break;
+            default:
+                control->select(room->getItem(key));
+                break;
         }
     }
-    altPressed = (mods & GLFW_MOD_ALT) != 0;
+    altPressing = (mods & GLFW_MOD_ALT) != 0;
+    shiftPressing = (mods & GLFW_MOD_SHIFT) != 0;
 }
 
-void scrollBallback(GLFWwindow *window, double offsetX, double offsetY) {
-    if (altPressed) {
+void scrollCallback(GLFWwindow *window, double offsetX, double offsetY) {
+    if (shiftPressing) {
+        control->move(-offsetY * 0.1f);
+        return;
+    }
+    if (altPressing) {
         camDist = glm::max(1.0f, (float)(camDist - offsetY * 0.1f));
     }
     else {
@@ -104,11 +126,13 @@ int main(int argc, char * argv[]) {
 
     room = new RoomControl();
     room->buildRoom(argv[1]);
+    control = new GeoControl();
+    mainScene->objects.push_back(control);
     
 //    glfwSetCursorPosCallback(window, mouseMoveCallback);
 //    glfwSetMouseButtonCallback(window, mouseButtonCallback);
     glfwSetKeyCallback(window, keyCallback);
-    glfwSetScrollCallback(window, scrollBallback);
+    glfwSetScrollCallback(window, scrollCallback);
 
     while (!glfwWindowShouldClose(window)) {
         glfwPollEvents();

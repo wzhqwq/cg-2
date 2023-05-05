@@ -191,3 +191,32 @@ void Bulb::setOff() {
 void Bulb::setOn() {
     head->material = unlitBulbOnMaterial;
 }
+
+void Arrow::setup(float length) {
+    body = new Cylinder(10);
+    body->scale(vec3(0.05f, length, 0.05f));
+    body->translate(vec3(0, length / 2, 0));
+    body->material = Material(vec3(1));
+    body->material.mode = UnlitSingleColor;
+
+    head = new Cone(10);
+    head->scale(vec3(0.2f));
+    head->translate(vec3(0, length, 0));
+    head->material = Material(vec3(1));
+    head->material.mode = UnlitSingleColor;
+    
+    addObject(body);
+    addObject(head);
+}
+void Arrow::setColor(vec3 color) {
+    body->material.diffuseColor = color;
+    head->material.diffuseColor = color;
+}
+void Arrow::setOpacity(float opacity) {
+    if (1.0f - opacity > 1e-3f) {
+        body->material.translucent = 1;
+        head->material.translucent = 1;
+    }
+    body->material.opacity = opacity;
+    head->material.opacity = opacity;
+}

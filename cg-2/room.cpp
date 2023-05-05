@@ -38,7 +38,7 @@ void RoomControl::buildRoom(string baseUrl) {
     bulb = new Bulb();
     bulb->translate(vec3(0, 6, 0));
     mainScene->objects.push_back(bulb);
-    
+        
     toDay();
 }
 
@@ -54,4 +54,21 @@ void RoomControl::toNight() {
     room->updateLight(roomLight);
     table->updateLight(roomLight);
     bulb->setOn();
+}
+
+Object *RoomControl::getItem(GLenum key) {
+    switch (key) {
+        case GLFW_KEY_T:
+            return table;
+        case GLFW_KEY_C:
+            return chair;
+        case GLFW_KEY_G:
+            return globe;
+        case GLFW_KEY_V:
+            return vase;
+        case GLFW_KEY_S:
+            return slime;
+        default:
+            return NULL;
+    }
 }

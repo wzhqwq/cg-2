@@ -24,9 +24,11 @@ public:
     virtual void applyTransformation(mat4 matrix);
     virtual void paint();
     virtual void castShadow(mat4 t);
+    void translateOrigin(vec3 delta);
     void translate(vec3 t);
     void scale(vec3 s);
     void rotate(float angle, vec3 axis);
+    vec3 getTranslation();
 private:
     vec3 origin = vec3(0);
 };
