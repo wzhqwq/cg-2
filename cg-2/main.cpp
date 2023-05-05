@@ -16,7 +16,7 @@
 using namespace glm;
 
 int altPressing = 0, shiftPressing = 0;
-float camDist = 10.0f, camAngle = pi<float>() * -0.1, camHeight = 5.0f;
+float camDist = 10.0f, camSteer = r90 / 6, camPitch = r90 / 4;
 Scene *mainScene;
 RoomControl *room;
 GeoControl *control;
@@ -31,11 +31,30 @@ void render() {
     }
 }
 
-//void mouseMoveCallback(GLFWwindow *window, double xpos, double ypos) {
-//    int left = glfwGetMouseButton(window, GLFW_MOUSE_BUTTON_LEFT);
-//    int right = glfwGetMouseButton(window, GLFW_MOUSE_BUTTON_RIGHT);
-//}
-//
+void mouseMoveCallback(GLFWwindow *window, double xpos, double ypos) {
+    static double lastX, lastY;
+    int left = glfwGetMouseButton(window, GLFW_MOUSE_BUTTON_LEFT);
+    int right = glfwGetMouseButton(window, GLFW_MOUSE_BUTTON_RIGHT);
+    
+    if (left || right) {
+        double offsetX = xpos - lastX, offsetY =  ypos - lastY;
+        if (right) {
+            camDist = glm::max(1.0f, (float)(camDist - offsetX * 0.1f));
+        }
+        if (left) {
+            camSteer -= offsetX * 0.01f;
+            camPitch += offsetY * 0.02f;
+            camPitch = fmin(r90 - 0.01f, fmax(-r90 + 0.01f, camPitch));
+        }
+        mainScene->moveTo(vec3(camDist * sin(camSteer) * cos(camPitch),
+                               camDist * sin(camPitch),
+                               camDist * cos(camSteer) * cos(camPitch)));
+    }
+
+    lastX = xpos;
+    lastY = ypos;
+}
+
 //void mouseButtonCallback(GLFWwindow *window, int button, int action, int mods) {
 //    double x, y;
 //    glfwGetCursorPos(window, &x, &y);
@@ -80,10 +99,13 @@ void scrollCallback(GLFWwindow *window, double offsetX, double offsetY) {
         camDist = glm::max(1.0f, (float)(camDist - offsetY * 0.1f));
     }
     else {
-        camAngle -= offsetX * 0.02f;
-        camHeight += offsetY * 0.1f;
+        camSteer -= offsetX * 0.02f;
+        camPitch += offsetY * 0.02f;
+        camPitch = fmin(r90 - 0.01f, fmax(-r90 + 0.01f, camPitch));
     }
-    mainScene->moveTo(vec3(camDist * sin(camAngle), camHeight, camDist * cos(camAngle)));
+    mainScene->moveTo(vec3(camDist * sin(camSteer) * cos(camPitch),
+                           camDist * sin(camPitch),
+                           camDist * cos(camSteer) * cos(camPitch)));
 }
 
 int main(int argc, char * argv[]) {
@@ -122,14 +144,14 @@ int main(int argc, char * argv[]) {
     initMaterials();
     
     mainScene = new Scene(WIDTH, HEIGHT);
-    mainScene->moveTo(vec3(camDist * sin(camAngle), camHeight, camDist * cos(camAngle)));
+    scrollCallback(window, 0, 0);
 
     room = new RoomControl();
     room->buildRoom(argv[1]);
     control = new GeoControl();
     mainScene->objects.push_back(control);
     
-//    glfwSetCursorPosCallback(window, mouseMoveCallback);
+    glfwSetCursorPosCallback(window, mouseMoveCallback);
 //    glfwSetMouseButtonCallback(window, mouseButtonCallback);
     glfwSetKeyCallback(window, keyCallback);
     glfwSetScrollCallback(window, scrollCallback);
