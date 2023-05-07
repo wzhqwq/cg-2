@@ -142,10 +142,10 @@ void Ring::setup(int slices, int stacks, float inset, float start, float end) {
         // 起始面的法线是起始角+90度
         addVert(vec3(R * cos(start), 0, -R * sin(start)),
                 vec2(texFragX * (i + 0.5f), 0),
-                vec3(-sin(start), 0, -cos(start)));
+                vec3(sin(start), 0, cos(start)));
         addVert(vec3(glm::rotate(mat4(1), start, vec3(0, 1, 0)) * pos),
                 vec2(texFragX * (i + 0.5f), texFragY),
-                vec3(-sin(start), 0, -cos(start)));
+                vec3(sin(start), 0, cos(start)));
         for (int j = 0; j <= stacks; j++) {
             float angle = start + (end - start) * j / stacks;
             mat4 rMat = glm::rotate(mat4(1), angle, vec3(0, 1, 0));
@@ -157,10 +157,10 @@ void Ring::setup(int slices, int stacks, float inset, float start, float end) {
         // 终止面的法线是终止角-90度
         addVert(vec3(glm::rotate(mat4(1), end, vec3(0, 1, 0)) * pos),
                 vec2(texFragX * (i + 0.5f), 1.0f - texFragY),
-                vec3(sin(end), 0, cos(end)));
+                vec3(-sin(end), 0, -cos(end)));
         addVert(vec3(R * cos(end), 0, -R * sin(end)),
                 vec2(texFragX * (i + 0.5f), 1),
-                vec3(sin(end), 0, cos(end)));
+                vec3(-sin(end), 0, -cos(end)));
     }
     for (int i = 0; i < slices; i++) {
         int offset = i * (stacks + 5);

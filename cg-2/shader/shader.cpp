@@ -34,8 +34,7 @@ void initPrograms(string basePath) {
 ShapeShader::ShapeShader(string basePath) {
     program = loadProgram(basePath + "shape.vert", basePath + "shape.frag");
     modelLoc = glGetUniformLocation(program, "Model");
-    viewLoc = glGetUniformLocation(program, "View");
-    projectionLoc = glGetUniformLocation(program, "Projection");
+    viewProjectionLoc = glGetUniformLocation(program, "ViewProjection");
     modeLoc = glGetUniformLocation(program, "mode");
     ambientLoc = glGetUniformLocation(program, "ambient");
     diffuseLoc = glGetUniformLocation(program, "diffuse");
@@ -44,6 +43,7 @@ ShapeShader::ShapeShader(string basePath) {
     lightPosLoc = glGetUniformLocation(program, "lightPosDir");
     lightColorLoc = glGetUniformLocation(program, "lightColor");
     lightIntensityLoc = glGetUniformLocation(program, "lightIntensity");
+    viewerPosLoc = glGetUniformLocation(program, "viewerPos");
     
     glUseProgram(program);
     glUniform1i(glGetUniformLocation(program, "texture1"), 0);

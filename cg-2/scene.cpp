@@ -8,10 +8,10 @@
 #include "scene.hpp"
 
 void Scene::moveTo(vec3 p) {
-    currentPos = p;
-    view = lookAt(currentPos, vec3(0, 0, 0), vec3(0, 1, 0));
+    mat4 viewProjection = projection * lookAt(p, vec3(0, 0, 0), vec3(0, 1, 0));
     glUseProgram(shapeShader->program);
-    glUniformMatrix4fv(shapeShader->viewLoc, 1, GL_FALSE, &view[0][0]);
+    glUniformMatrix4fv(shapeShader->viewProjectionLoc, 1, GL_FALSE, &viewProjection[0][0]);
+    glUniform3fv(shapeShader->viewerPosLoc, 1, &p[0]);
 }
 
 void Scene::render() {
